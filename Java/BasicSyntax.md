@@ -450,3 +450,15 @@ public static int safeAdd(int left, int right) {
   - a << b : 정수 a의 각 비트를 b만큼 왼쪽으로 이동. 남은 부분은 0으로 채움.
   - a >> b : 정수 a의 각 비트를 b만큼 오른쪽으로 이동. 남은 부분은 정수 a의 최상위 부호비트와 같은 값을 채움.
   - a >>> b : 정수 a의 각 비트를 b만큼 오른쪽으로 이동함. 남은 부분은 0으로 채움.
+
+
+
+
+
+# Reference
+
+- [쉽게 배우는 자바 프로그래밍 - 우종정](http://www.kyobobook.co.kr/product/detailViewKor.laf?ejkGb=KOR&mallGb=KOR&barcode=9791156645146&orderClick=LAG&Kc=)
+
+- [혼자 공부하는 자바 - 신용권](http://www.kyobobook.co.kr/product/detailViewKor.laf?ejkGb=KOR&mallGb=KOR&barcode=9791162241875&orderClick=LAG&Kc=)
+- [자바의 정석 - 남궁성](http://www.kyobobook.co.kr/product/detailViewKor.laf?ejkGb=KOR&mallGb=KOR&barcode=9788994492032&orderClick=LAG&Kc=)
+
