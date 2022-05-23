@@ -6,6 +6,10 @@
 
 
 
+복습 날짜
+
+5월 24일
+
 ## 1. 참조 타입과 참조 변수
 
 
@@ -40,10 +44,10 @@
 - null
   - 참조 타입 변수는 null 값을 가질 수 있음. 이는 힙 영역의 객체를 참조하지 않는다는 뜻.
   - null 값도 초기값으로 사용할 수 있음. null로 초기회된 참조 변수는 스택 영역에 생성됨.
-- NullPointException
+- NullPointerException
   - 자바는 프로그램 실행 도중에 발생하는 오류를 예외(Excepton)라고 부름.
   - 예외는 사용자의 잘못된 입력, 프로그래머가 코드를 잘못 작성하는 경우 등에 발생함.
-  - NullPointException은 참조 객체가 없는 참조 변수를 사용할 경우 발생하는 예외. 참조 변수를 사용하면서 가장 많이 발생하는 예외임.
+  - NullPointerException은 참조 객체가 없는 참조 변수를 사용할 경우 발생하는 예외. 참조 변수를 사용하면서 가장 많이 발생하는 예외임.
 
 
 
@@ -261,6 +265,8 @@ System.arraycopy(원본 배열, 시작 인덱스, 대상 배열, 시작 인덱�
 ```
 
 - 복사되지 않는 항목은 String[] 배열의 초기값 null
+- 원본 배열의 길이를 초과하여 복사할려고 시도할 경우 ArrayIndexOutOfBoundsException 발생.
+- 일반적으로 '시작 인덱스'에는 0을 넣고 '복사할 개수'에는 원본 배열.length 넣음
 
 
 
@@ -284,7 +290,7 @@ public static void main(String[] args) {
 	int[] scores = { 95, 71, 84, 93, 87 };
 	
 	int sum = 0;
-	for (int score : socres){
+	for (int score : scores){
 		sum = sum + score;
 	}
 	System.out.println("점수 총합 = " + sum);
