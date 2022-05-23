@@ -2,7 +2,7 @@
 
 
 
-## 제어문
+## 1. 제어문
 
 - 프로그래밍 언어는 제어문을 사용해 실행문을 비순차적으로 수행할 수 있게 함.
 - 제어문은 실행문의 수행 순서를 변경하는 것을 조건문, 반복문, 분기문이 있음.
@@ -20,7 +20,7 @@
 
 
 
-## 조건문
+## 2. 조건문
 
 ### 단순 if 문
 
@@ -75,7 +75,7 @@
 
 
 
-## 반복문
+## 3. 반복문
 
 - 조건에 따라 같은 처리를 반복함.
 - while 문, do~while 문, for 문이 있음.
@@ -333,7 +333,7 @@ do~while 문으로 채팅 프로그램 만들기
 
 
 
-## 분기문
+## 4. 분기문
 
 
 
@@ -530,13 +530,44 @@ public class BreakOutterExam {
   		}
   ```
 
+
+
+
+### 개선된 switch 문
+
+- case 문을 간략히 하고 '->'를 이용하여 문법을 수정함.
+
+- ```java
+  	public static void main(String[] args) {
+  		// Scanner로 입력 받은 값을 판단하는 switch문 구현
+  		Scanner in = new Scanner(System.in);
+  		System.out.println("동물의 이름을 입력하세요 >>");
+  		String Monster = in.nextLine();
+  
+  		whoIsIt(Monster);
+  
+  	} // main 메소드 종료
+  
+  	static void whoIsIt(String bio) {
+  		String kind = "미지의 생물";
+  		switch (bio) {
+  		case "호랑이", "사자", "강아지", "고양이" -> kind = "포유류";
+  		case "독수리", "참새", "까마귀", "비둘기" -> kind = "조류";
+  		case "고등어", "연어", "삼치", "갈치" -> kind = "어류";
+  		default -> System.out.println("어이쿠!!!");
+  		}
+  		System.out.printf("%s는 %s이다.\n", bio, kind);
+  	}
+  
+  ```
+
   
 
 
 
 
 
-## 메서드
+## 5. 메서드
 
 
 
