@@ -8,7 +8,7 @@
 
 복습 날짜
 
-5월 24일
+220524
 
 ## 1. 참조 타입과 참조 변수
 
@@ -246,14 +246,14 @@ public static void main(String[] args) {
 	int[] oldIntArray = { 1, 2, 3 };
 	int[] newIntArray = new int[5];
 	
-	for(int i=0; i<oldIntArray.length; i++){
+	for(int i=0; i<oldIntArray.length; i++){ // for문으로 배열 복사
 		newIntArray[i] = oldIntArray[i];
 	}
 	
-	for(int=0; i<newIntArray.length; i++) {
+	for(int=0; i<newIntArray.length; i++) { // System.arraycopy() 메소드로 배열 복사
 		System.out.print(newIntArray[i] + ", ");
 	}
-} // 실행결과는 1, 2, 3, 0, 0,
+} // 실행결과는 1, 2, 3, 0, 0
 ```
 
 
@@ -359,5 +359,5 @@ Week today = Week.SUNDAY;
   - 열거 타입 변수 today는 스택 영역에 생성됨.
   - today에 저장되는 값은 메소드 영역의 Week.SUNDAY 열거 상수가 참조하는 힙 영역 Week 객체의 번지.
   - `today == Week.SUNDAY; // true`
-  - 
+
 - 열거 타입 변수는 스택 영역에 생성되고 열거 상수와 같은 객체를 참조함.
