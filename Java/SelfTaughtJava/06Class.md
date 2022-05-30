@@ -484,6 +484,75 @@ public class Car {
 
 ```
 
+- this() 매개변수 개수를 조작하여 서로 다른 this를 참조하게 할 수 있음.
+- 호출의 호출도 가능함. 순서대로 참조하게 했을 경우 역순으로 실행됨.
+
+```java
+public class Parent {
+	public String nation;
+	public String ssn;
+	public String color;
+	
+	public Parent() {
+		this("대한민국", "123123", "녹색"); // 매개변수 3개인 this 호출
+		System.out.println("4등");
+	}
+	
+	public Parent(String nation) {
+		this(nation,"12");
+		System.out.println("3등");
+	}
+	
+	public Parent(String nation, String ssn) {
+		this(nation, ssn, "파랑");
+		System.out.println("2등");
+	}
+	
+	public Parent(String nation, String ssn, String color) {
+		this.nation = nation;
+		this.ssn = ssn;
+		this.color = color;
+		System.out.println("1등");
+	}
+}
+
+// 실행결과 1등 4등
+```
+
+```java
+public class Parent {
+	public String nation;
+	public String ssn;
+	public String color;
+	
+	public Parent() {
+		this("대한민국"); // 매개변수 1개인 this 호출
+		System.out.println("4등");
+	}
+	
+	public Parent(String nation) {
+		this(nation,"12"); // 매개변수 2개인 this 호출
+		System.out.println("3등");
+	}
+	
+	public Parent(String nation, String ssn) {
+		this(nation, ssn, "파랑"); // 매개변수 3개인 this 호출
+		System.out.println("2등");
+	}
+	
+	public Parent(String nation, String ssn, String color) {
+		this.nation = nation;
+		this.ssn = ssn;
+		this.color = color;
+		System.out.println("1등");
+	}
+}
+
+// 실행결과 1등 2등 3등 4등
+```
+
+
+
 
 
 ## 4. 메소드
