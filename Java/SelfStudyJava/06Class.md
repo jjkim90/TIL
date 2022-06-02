@@ -988,7 +988,7 @@ sec06.exam02.kumho.Tire tire4 = new sec06.exam02.kumho.Tire();
 - 접근 제한자는 public, protected, default, private 4종류가 있음.
   - public  : 외부 클래스가 자유롭게 사용할 수 있도록 함.
   - protected : 같은 패키지 또는 자식 클래스에서 사용할 수 있도록 함.
-  - private : 외부에서 사용될 수 없도록 함.
+  - private : 클래스 외부에서 사용될 수 없도록 함.
   - default : 같은 패키지에 소속된 클래스에서만 사용할 수 있도록 함.
 - public -> protected -> default -> private 순으로 접근 제한이 강화됨.
 
@@ -1051,19 +1051,19 @@ sec06.exam02.kumho.Tire tire4 = new sec06.exam02.kumho.Tire();
 void setSpeed(double speed){
 	if(speed < 0){
 	this.speed = 0;
-	return;
+    return;
 	} else {
 	this.speed = speed;
 	}
 }
 ```
 
-- 외부에서 객체의 데이터를 읽을 때 Getter 메소드를 사용하면 필드값을 가공한 후 외부로 전달 가능함.
+- 외부에서 객체의 데이터를 읽을 때 Setter 메소드를 사용하면 필드값을 가공한 후 외부로 전달 가능함.
 - Getter 메소드 (필드값 읽기)
 
 ```java
 double getSpeed() {
-	double km - speed * 1.6;
+	double km = speed * 1.6;
 	return km;
 }
 ```
