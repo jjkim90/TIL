@@ -56,33 +56,70 @@ HashSet / Hashtable / HashMap
 
 ### 1.4. System 클래스
 
+운영체제가 가진 기능을 이용하도록 설계됨. 정적 필드와 메소드로 구성됨.
+
 
 
 #### 프로그램 종료(exit())
+
+exit(int 종료상태값) 0정상종료 
 
 
 
 #### 현재 시각 읽기(currentTimeMillis(), nanoTime())
 
+currenttimemillis -> 1/10^3 단위 long값
+
+nanotime -> 1/10^9단위 long값
+
+코드 실행 시간 측정에 활용됨.
+
 
 
 ### 1.5. Class 클래스
+
+클래스와 인터페이스의 메타데이터를 Class 클래스로 관리
+
+타입 이름, 파일 경로 정보, 필드 생성자 메소드 정보
 
 
 
 #### Class 객체 얻기(getClass(), forName())
 
+클래스로부터 얻는 방법
+
+1) Class clazz = 클래스이름.class
+2) Class clazz = Class.forName("패키지...클래스이름")
+
+객체로부터 얻는 방법
+
+3. Class clazz = 참조변수.getClass();
+
 
 
 #### 클래스 경로를 활용해서 리소스 절대 경로 얻기
+
+Class 객체는 파일 경로 정보 가지고 있어 이 경로 활용해 다른 리소스 파일의 경로 얻을 수 있음.
+
+String photo1Path = clazz.getResource("photo1.jpg").getPath();
+
+UI 프로그램에서 이미지에 대한 절대경로를 얻어야 할 때 사용함.
 
 
 
 ### 1.6. String 클래스
 
+String str = "자바";
+
 
 
 #### String 생성자
+
+String 생성자 다양함.
+
+
+
+
 
 
 
@@ -152,7 +189,9 @@ HashSet / Hashtable / HashMap
 
 ### 1.8. Math 클래스
 
+Math.random() : 0.0이상 1.0 미만 하나의 double 타입 값 리턴
 
+1~10임의의 정수 리턴하기 (int) (Math.random() * 10) + 1
 
 
 
@@ -160,17 +199,57 @@ HashSet / Hashtable / HashMap
 
 ## 2. java.util 패키지
 
-
-
-
+java.util 패키지는 날짜 정보를 제공하는 유용한 API를 포함하고 있다.
 
 
 
 ### 2.1. Date 클래스
 
+날짜를 표현하는 클래스
+
+객체 간 날짜 정보를 주고 받을 때 매개 변수나 리턴 타입으로 주로 사용
+
+매개변수 : void method(Date date){...}
+
+리턴값 : Date method(...){...}
+
+클래스 : Date now = new Date(); (현재 os 날짜 정보 기반으로 객체 생성)
+
+-> 영어로 된 문자열 출력됨. 원하는 형식 위해 java.text 패키지의 SimpleDataFormat 클래스와 함께 사용
+
+SimpleDateFormat sdf = new SimpleDateFormat("yyyy년 MM월 dd일 hh시 mm분 ss초");
+
+format() 메소드 호출
+
+String strNow = sdf.format(now);
+
 
 
 ### 2.2. Calendar 클래스
+
+달력을 표현한 클래스.
+
+운영체제의 날짜 및 시간 기준으로 다양한 정보를 얻을 수 있음.
+
+추상 클래스이므로 new 연산자 사용하여 인스턴스 생성 불가.
+
+getInstance() 메소드 이용하여 Calendar 하위 객체 얻을 수 있음.
+
+Calendar now = Calendar.getInstance();
+
+int year = now.get(Calendar.YEAR); // 연도를 리턴
+
+MONTH // 0~11리턴 ---> MONTH+1 // 1~12리턴
+
+DAY_OF_MONTH // 1~31 리턴
+
+DAY_OF_WEEK // 1~7 리턴
+
+AM_PM // 오전/오후 리턴
+
+HOUR, MINUTE, SECOND // 시,분,초 리턴
+
+
 
 
 
