@@ -4,21 +4,23 @@
 
 ## 1. 테이블에 데이터 추가하기
 
-### 1.1. 테이블 생성하기
+
+
+### 테이블 생성하기
 
 - 특정 테이블에 데이터를 새로 추가할 때 INSERT문을 사용함.
 
 ```
 // DEPT 테이블을 복사하여 DEPT_TEMP 테이블 만들기
 CREATE TABLE DEPT_TEMP
-AS SELECT * FROM DEPT;
+    AS SELECT * FROM DEPT;
 ```
 
 - CREATE문은 DDL(Data Definition Language) 명령어.
 
 
 
-### 1.2. INSERT문 실습 전 유의점
+### INSERT문 실습 전 유의점
 
 #### 테이블을 잘못 만들었을 때
 
@@ -35,7 +37,7 @@ DROP TABLE 테이블이름;
 
 
 
-### 1.3. 테이블에 데이터를 추가하는 INSERT문
+### 테이블에 데이터를 추가하는 INSERT문
 
 ```
 // INSERT문 기본 형태
@@ -44,6 +46,12 @@ VALUES (열1에 들어갈 데이터, 열2에 들어갈 데이터, ... , 열N에 
 ```
 
 - INSERT INTO절 뒤에 데이터를 추가할 테이블 이름을 명시하고, 해당 테이블의 열을 소괄호로 묶어 지정한 후 VALUES절에는 지정한 열에 입력할 데이터를 작성.
+
+```
+// DEPT_TEMP 테이블에 데이터 추가하기
+INSERT INTO DEPT_TEMP (DEPTNO, DNAME, LOC)
+VALUES (50, 'DATABASE', 'SEOUL');
+```
 
 
 

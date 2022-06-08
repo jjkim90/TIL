@@ -219,21 +219,279 @@ Outter.this.method();
 
 ### 1.3. 중첩 인터페이스
 
+- 중첩 인터페이스는 클래스의 멤버로 선언된 인터페이스를 말함.
+- 인터페이스를 클래스 내부에 선언하는 이유는 해당 클래스와 긴밀한 관계를 맺는 구현 클래스를 만들기 위해서임.
 
+```java
+class A {
+    [static] interface I {
+        void method();
+    }
+}
+```
 
+- 중첩 인터페이스는 인스턴스 멤버 인터페이스와 정적(static) 멤버 인터페이스 모두 가능함.
+  - 인스턴스 멤버 인터페이스는 바깥 클래스의 객체가 있어야 사용 가능함.
+  - 정적 멤버 인터페이스는 바깥 클래스의 객체 없이 바깥 클래스만으로 바로 접근 가능함.
+- 주로 정적 멤버 인터페이스를 많이 사용함. UI 프로그래밍에서 이벤트를 처리할 목적으로 많이 활용됨.
 
+```java
+// 중첩 인터페이스
+public class Button{
+    OnClickListener listener;
+    
+    void setOnClickListener(OnClickListener listener){
+        this.listener = listener;
+    }
+    
+    void touch(){
+        listener.onClick();
+    }
+    
+    static interface OnClickListener{
+        void onClick();
+    }
+}
+
+// 구현 클래스
+public class CallListener implements Button.OnClickListener {
+    @Override
+    public void onClick(){
+    System.out.println("전화를 겁니다.");
+	}
+}
+
+// 구현 클래스
+public class MessageListener implements Button.OnClickListener{
+    @Override
+    public void onClick(){
+        System.out.println("메시지를 보냅니다.");
+    }
+}
+
+// 버튼 이벤트 처리
+public class ButtonExample{
+    public static void main(String[] args){
+        Button btn = new Button();
+        
+        btn.setOnClickListener(new CallListener());
+        btn.touch();
+        
+        btn.setOnClickListener(new MessageListener());
+        btn.touch();
+    }
+}
+
+/* 실행결과
+전화를 겁니다.
+메시지를 보냅니다.
+*/
+```
 
 
 
 ## 2. 익명 객체
 
+- 익명(anonymous) 객체는 클래스 이름이 없는 객체를 말함.
+- 익명 객체를 만들려면 어떤 클래스를 상속하거나 인터페이스를 구현해야만 함.
+
 
 
 ### 2.1. 익명 자식 객체 생성
 
+- 자식 클래스를 명시적으로 선언할 때는 재사용성을 높이고 싶을 때임. 어디서건 이미 선언된 자식 클래스로 간단히 객체를 생성해서 사용할 수 있음.
+- 익명 자식 객체를 생성할 때는 자식 클래스가 재사용되지 않고, 오로지 특정 위치에서 사용할 경우임.
+
+```java
+부모클래스 [필드|변수] = new 부모클래스(매개값, ...){
+	//필드
+    //메소드
+};
+```
+
+- 하나의 실행문이므로 끝에는 세미콜론(;)을 반드시 붙여야 함.
+- 익명 자식 객체는 필드 사용, 로컬 변수 사용, 매개값 사용 가능함.
+
+```java
+// 필드를 선언할 때 초기값으로 익명 자식 객체를 생성해서 대입
+class A {
+    Parent field = new Parent(){
+        int childField;
+        void childMethod(){}
+        @Override
+        void parentMethod(){}
+    };
+}
+
+// 메소드 내에서 로컬 변수를 선언할 때 초기값으로 익명 자식 객체를 생성해서 대입
+class A {
+    void method(){
+        Parent localVar = new Parent(){
+            int childField;
+            void childMethod(){}
+            @Override
+            void parentMethod(){}
+        };
+    }
+}
+
+// 메소드의 매개 변수가 부모 타입일 경우 메소드를 호출하는 코드에서 익명 자식 객체를 생성해서 매개값으로 대입
+class A {
+    void method1(Parent parent){}
+    
+    void method2(){
+        method1(
+        new Parent() {
+            int childField;
+            void childMethod(){}
+            @Override
+            void parentMethod(){}
+        }
+        );
+    }
+}
+```
+
+- 익명 자식 객체에 새롭게 정의된 필드와 메소드는 익명 자식 객체 내부에서만 사용되고, 외부에서는 접근할 수 없음.
+
 
 
 ### 2.2. 익명 구현 객체 생성
+
+- 구현 클래스를 명시적으로 선언하면 어디서건 이미 선언된 구현 클래스로 간단히 객체를 생성해서 사용할 수 있음. 재사용성이 높음.
+- 익명 구현 객체를 생성해서 사용하는 이유는 구현 클래스가 재사용되지 않고, 오로지 특정 위치에서 사용할 경우이기 때문임.
+- 익명 구현 객체는 필드 사용, 로컬 변수 사용, 매개값 사용이 가능함.
+
+```java
+// 인터페이스
+public interface RemoteControl {
+	public void turnOn();
+	public void turnOff();
+}
+
+// 익명 구현 객체 생성
+public class Anonymous {
+	//필드 초기값으로 익명 구현 객체 대입
+	RemoteControl interfaceField = new RemoteControl() {
+		@Override
+		public void turnOn() {
+			System.out.println("TV를 켭니다.");
+		}
+		@Override
+		public void turnOff() {
+			System.out.println("TV를 끕니다.");
+		}
+	};
+	
+	//로컬 변수값으로 익명 구현 객체 대입
+	void method1() {
+		RemoteControl interfaceLocalVar = new RemoteControl() {
+			@Override
+			public void turnOn() {
+				System.out.println("Audio를 켭니다.");
+			}
+			@Override
+			public void turnOff() {
+				System.out.println("Audio를 끕니다.");
+			}
+		};
+		interfaceLocalVar.turnOn();
+		interfaceLocalVar.turnOff();
+	}
+	
+	//매개값으로 익명 구현 객체 대입
+	void method2(RemoteControl rc) {
+		rc.turnOn();
+		rc.turnOff();
+	}
+}
+
+// 메인 메소드
+public class AnonymousExample {
+
+	public static void main(String[] args) {
+		Anonymous anony = new Anonymous();
+		
+		anony.interfaceField.turnOn();
+		anony.interfaceField.turnOff();
+		
+		anony.method1();
+		
+		anony.method2(new RemoteControl() {
+			@Override
+			public void turnOn() {
+				System.out.println("SmartTV를 켭니다.");
+			}
+			@Override
+			public void turnOff() {
+				System.out.println("SmartTV를 끕니다.");
+			}
+		}
+		);
+	}
+}
+```
+
+- 윈도우 및 안드로이드 등의 UI 프로그램에서 버튼의 클릭 이벤트를 처리하기 위해 익명 구현 객체를 이용하는 방법
+
+```java
+// UI 클래스
+public class Button{
+    OnClickListener listener;
+    
+    void setOnClickListener(OnClickListener listener){
+        this.listener = listener;
+    }
+    
+    void touch(){
+        listener.onClick();
+    }
+    
+    static interface OnClickListener {
+        void onClick();
+    }
+}
+
+// Window 클래스 (2개의 버튼 객체를 가지고 있는 창)
+public class Window{
+    Button button1 = new Button();
+    Button button2 = new Button();
+    
+    // 필드 초기값으로 익명 구현 객체 대입
+    Button.OnClickListener listener = new Button.OnClickListener(){
+      @Override
+        public void onClick(){
+            System.out.println("전화를 겁니다.");
+        }
+    };
+    
+    Window(){
+        button1.setOnClickListener(listener); // 매개값으로 필드 대입
+        // 매개값으로 익명 구현 객체 대입
+        button2.setOnClickListener(new Button.OnClickListener(){
+           @Override
+            public void onClick(){
+                System.out.println("메시지를 보냅니다.");
+            }
+        });
+    }
+}
+
+// 실행 클래스
+public class Main{
+    public static void main(String[] args){
+        Window w = new Window();
+        w.button1.touch();
+        w.button2.touch();
+    }
+}
+
+/*
+실행결과
+전화를 겁니다.
+메시지를 보냅니다.
+*/
+```
 
 
 
