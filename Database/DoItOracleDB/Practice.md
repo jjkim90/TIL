@@ -1,0 +1,28 @@
+<데이터 조작어 DML>
+INSERT INTO
+VALUES
+
+UPDATE TABLE
+SET ~
+
+DELETE FROM TABLE
+WHERE ~
+
+<데이터 정의어 DDL>
+CREATE TABLE (
+이름1 자료형1
+이름2 자료형2
+...
+);
+
+ALTER TABLE 테이블이름
+ADD 이름 자료형;
+RENAME COLUMN 이름A TO 이름B;
+MODIFY 이름 자료형;
+DROP COLUMN 이름;
+
+RENAME 이름A TO 이름B;
+
+TRUNCATE TABLE 테이블이름;
+
+DROP TABLE 테이블이름;
