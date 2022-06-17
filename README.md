@@ -35,7 +35,7 @@
 
 ### Java
 
-- [(RT)혼자 공부하는 자바](java/selfstudyjava/index.md)
+- [(RT)혼자 공부하는 자바](java/self-study-java/index.md)
 
 ### Books
 
@@ -47,15 +47,15 @@
 
 Database
 
-- [(RT)Do It! 오라클로 배우는 데이터베이스 ](database/DoItOracleDB/README.md)
+- [(RT)Do It! 오라클로 배우는 데이터베이스 ](database/do-it-oracle-db/index.md)
 
 ### HTML
 
-- [(RT)한 권으로 끝내는 실무 Java 웹 개발서](html.md)
+- [(RT)한 권으로 끝내는 실무 Java 웹 개발서](html/html5.md)
 
 ### CSS
 
-- [(RT)한 권으로 끝내는 실무 Java 웹 개발서](css.md)
+- [(RT)한 권으로 끝내는 실무 Java 웹 개발서](css/css3.md)
 
 ### JavaScript
 
