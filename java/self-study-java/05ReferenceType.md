@@ -357,3 +357,9 @@ Week today = Week.SUNDAY;
   - `today == Week.SUNDAY; // true`
 
 - 열거 타입 변수는 스택 영역에 생성되고 열거 상수와 같은 객체를 참조함.
+
+
+
+# References
+
+- 
