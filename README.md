@@ -35,7 +35,7 @@
 
 ### Java
 
-- [(RT)혼자 공부하는 자바](java/selfstudyjava/README.md)
+- [(RT)혼자 공부하는 자바](java/selfstudyjava/index.md)
 
 ### Books
 
