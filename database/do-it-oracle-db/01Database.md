@@ -1,14 +1,10 @@
 # 데이터베이스
 
-
-
-
+  
 
 > 이 문서는 [<Do It! 오라클로 배우는 데이터베이스 입문>](http://www.kyobobook.co.kr/product/detailViewKor.laf?ejkGb=KOR&mallGb=KOR&barcode=9791163030300&orderClick=LEa&Kc=) 책을 보고 정리한 문서입니다.
 
-
-
-
+  
 
 ## 1. 데이터와 데이터베이스, DBMS
 
@@ -17,7 +13,7 @@
 
 - 오라클 - 유료 / 마리아DB - 무료
 
-
+<br/>
 
 ### 1.2. 데이터와 정보
 
