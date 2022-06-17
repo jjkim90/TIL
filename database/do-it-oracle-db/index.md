@@ -2,11 +2,11 @@
 
 
 
-### [01 데이터베이스](do-it-oracle-db/01Database.md)
+### [01 데이터베이스](01Database.md)
 
 
 
-### [02 관계형 데이터베이스와 오라클 데이터베이스](do-it-oracle-db/02RDBMSAndOracleDB.md)
+### [02 관계형 데이터베이스와 오라클 데이터베이스](02RDBMSAndOracleDB.md)
 
 
 
@@ -14,19 +14,19 @@
 
 
 
-### [04 SELECT문의 기본 형식](do-it-oracle-db/04SelectStatement.md)
+### [04 SELECT문의 기본 형식](04SelectStatement.md)
 
 
 
-### [05 더 정확하고 다양하게 결과를 출력하는 WHERE절과 연산자](do-it-oracle-db/05WhereStatement.md)
+### [05 더 정확하고 다양하게 결과를 출력하는 WHERE절과 연산자](05WhereStatement.md)
 
 
 
-### [06 데이터 처리와 가공을 위한 오라클 함수](do-it-oracle-db/06Function.md)
+### [06 데이터 처리와 가공을 위한 오라클 함수](06Function.md)
 
 
 
-### [07 다중행 함수와 데이터 그룹화](do-it-oracle-db/07MultipleRowFunction.md)
+### [07 다중행 함수와 데이터 그룹화](07MultipleRowFunction.md)
 
 
 
@@ -34,44 +34,44 @@
 
 
 
-### [09 SQL문 속 또 다른 SQL문, 서브쿼리](do-it-oracle-db/09Subquery.md)
+### [09 SQL문 속 또 다른 SQL문, 서브쿼리](09Subquery.md)
 
 
 
-### [10 데이터를 추가, 수정, 삭제하는 데이터 조작어](do-it-oracle-db/10DataManipulationLanguage.md)
+### [10 데이터를 추가, 수정, 삭제하는 데이터 조작어](10DataManipulationLanguage.md)
 
 
 
-### [11 트랜잭션 제어와 세션](do-it-oracle-db/11TransactionAndSession.md)
+### [11 트랜잭션 제어와 세션](11TransactionAndSession.md)
 
 
 
-### [12 데이터 정의어](do-it-oracle-db/12DataDefinitionLanguage.md)
+### [12 데이터 정의어](12DataDefinitionLanguage.md)
 
 
 
-### [13 객체 종류](do-it-oracle-db/13Objects.md)
+### [13 객체 종류](13Objects.md)
 
 
 
-### [14 제약 조건](do-it-oracle-db/14constraint.md)
+### [14 제약 조건](14constraint.md)
 
 
 
-### [15 사용자, 권한, 롤 관리](do-it-oracle-db/15UserAndPrivilege.md)
+### [15 사용자, 권한, 롤 관리](15UserAndPrivilege.md)
 
 
 
-### [16 PL/SQL 기초](do-it-oracle-db/16PLAndSQLBasic.md)
+### [16 PL/SQL 기초](16PLAndSQLBasic.md)
 
 
 
-### [17 레코드와 컬렉션](do-it-oracle-db/17RecordAndCollection.md)
+### [17 레코드와 컬렉션](17RecordAndCollection.md)
 
 
 
-### [18 커서와 예외 처리](do-it-oracle-db/18CursorAndException.md)
+### [18 커서와 예외 처리](18CursorAndException.md)
 
 
 
-### [19 저장 서브프로그램](do-it-oracle-db/19StoredProcedure.md)
+### [19 저장 서브프로그램](19StoredProcedure.md)

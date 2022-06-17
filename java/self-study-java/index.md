@@ -2,7 +2,7 @@
 
 
 
-- [2. 변수와 타입](Variable-And-Type)
+- [2. 변수와 타입](Variable-And-Type.md)
 - [3. 연산자](#chapter-3----)
 - [4. 조건문과 반복문](#chapter-4---------)
 - [5. 참조 타입](#chapter-5------)
