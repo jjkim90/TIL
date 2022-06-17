@@ -35,7 +35,7 @@
 
 ### Java
 
-- [(RT)혼자 공부하는 자바](#java/selfstudyjava/README.md)
+- [(RT)혼자 공부하는 자바](#java/SelfStudyJava/README.md)
 
 ### Books
 
@@ -47,7 +47,7 @@
 
 Database
 
-- [(RT)Do It! 오라클로 배우는 데이터베이스 입문](database/DoItOracleDB/README.md)
+- [(RT)Do It! 오라클로 배우는 데이터베이스 ](database/DoItOracleDB/README.md)
 
 ### HTML
 
