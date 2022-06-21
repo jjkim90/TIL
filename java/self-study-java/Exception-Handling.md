@@ -315,3 +315,7 @@ public class ThrowsExample {
 - main() 메소드에서 throws Exception을 붙이는 것은 좋지 못한 예외 처리 방법임. 프로그램 사용자는 프로그램이 알 수 없는 예외 내용을 출력하고 종료되는 것을 좋아하지 않음. 따라서 main()에서 try-catch 블록으로 예외를 최종 처리하는 것이 바람직함.
 
 <br>
+
+# References
+
+- [<혼자 공부하는 자바 - 신용권>](http://www.kyobobook.co.kr/product/detailViewKor.laf?ejkGb=KOR&mallGb=KOR&barcode=9791162241875&orderClick=LAG&Kc=)
