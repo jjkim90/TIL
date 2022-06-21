@@ -782,61 +782,571 @@ span{ color: red; }
 
 
 
-
-
 ### 3.6. 테이블 스타일 속성
 
+- 테이블 스타일 속성은 테이블에 관련 속성을 지정할 때 사용함.
+- 테이블의 속성 종류
+  - border-collapse : 테이블 셀 간의 간격 여부를 설정
+    - separate | collapse | inherit
+  - border-spacing : 테이블 셀 간의 공백 크기를 조절해 주는 속성
+    - separate인 상태에서만 가능.
+  - empty-cells : 테이블에서 빈 셀에 대해 그 셀의 테두리나 배경을 브라우저에 보여줄지 보여주지 않을지를 결정.
+    - separate인 상태에서만 가능. hide | show | inherit
+  - table-layout : 셀의 너비를 고정 또는 가변으로 할지를 설정함.
+    - auto | fixed | inherit
+  - vertical-align : 셀 안에서 수직 정렬함
+    - top | middle | bottom
+  - caption-side : 캡션의 위치를 정하는 속성임
+    - top | bottom | initial | inherit
 
-
-
+```html
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>미세먼지 농도 테이블 만들기</title>
+<style>
+	table{
+	    width: 100%;
+	    border-collapse: collapse;
+	    font-size: 14px;
+	    text-align: center;
+	}
+	 table > caption{
+	    font-size: 20px;
+	    font-weight:700;
+	    margin-bottom: 10px;
+	}
+	table td, table th{
+	    padding: 8px 5px;
+	    border: 1px solid #ccc;
+	}
+	.blue{
+	    color: white;
+	    background: #43cbff;
+	}
+	.green{
+	    color: white;
+	    background: #81d733;
+	}
+	.yellow{
+	    background: yellow;
+	}
+	.orange{
+	    background: orange;
+	}
+	.red{
+	    color: white;
+	    background: red;
+	}
+</style>
+</head>
+<body>
+<table>
+	<caption>미세먼지 농도</caption>
+	<thead>
+		<tr>
+			<th colspan="2">예보구간</th>
+			<th class="blue">좋음</th>
+			<th class="green">보통</th>
+			<th class="yellow">약간나쁨</th>
+			<th class="orange">나쁨</th>
+			<th class="red" colspan="2">매우나쁨</th>
+		</tr>
+	</thead>
+	<tbody>
+		<tr>
+			<td colspan="2">예측 농도</td>
+			<td>0~30</td>
+			<td>31~80</td>
+			<td>81~120</td>
+			<td>121~200</td>
+			<td>201~300</td>
+			<td>301 ~</td>
+		</tr>
+		<tr>
+			<td rowspan="2">행동 요령</td>
+			<td>노약자</td>
+			<td></td>
+			<td></td>
+			<td>장시간 실외 활동 가급적 자제</td>
+			<td>무리한 실외활동 자제요청 (특히 호흡기, 심질환자, 노약자)</td>
+			<td>실외활동 제한</td>
+			<td>실내생활</td>
+		</tr>
+		<tr>
+			<td>일반</td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td>장시간 무리한 실외활동 자제</td>
+			<td>실외활동 자제</td>
+			<td>실외활동 자제</td>
+		</tr>
+	</tbody>
+</table>
+</body>
+</html>
+```
 
 
 
 ### 3.7. 박스 모델 속성
 
+- 박스 모델(Box Model)이란 웹페이지에서 텍스트 문장이나 이미지 등의 콘텐츠를 만들 때 사용함.
+- 네모난 박스의 형태로 4개의 영역을 구성하고 각각 패딩(padding), 테두리(border), 여백(margin), 콘텐츠(content)로 구성함.
+- 박스 모델은 CSS의 레이아웃을 만들 때 가장 기본이 됨.
+- 여백(margin) 속성은 테두리와 이웃하는 다른 요소 사이의 간격의 크기를 설정함.
+- 여백은 패딩 영역처럼 background-color 속성으로 배경색의 영향을 받지 않음.
+- 여백의 속성 종류
+  - margin
+  - margin-top, right, bottom, left
+- margin 속성값을 auto로 설정하면 웹브라우저에서 오른쪽과 왼쪽 등 수평 방향의 여백 값을 자동으로 설정함.
+- 패딩(padding)은 내용과 테두리 사이의 영역을 설정함.
+- 패딩 영역은 background-color 속성으로 설정하는 배경색으로도 가능함.
+- 패딩의 속성 종류
+  - padding
+  - padding-top, right, bottom, left
+- padding 속성을 사용하면 top을 기준으로 시계방향으로 값이 설정됨.
 
+```html
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>문단에 여백 주기</title>
+<style>
+	span {
+		border: 2px solid teal;
+	}
+	span.pad {
+		padding:50px 20px 50px 20px;
+ 		/*padding-top: 50px;
+		padding-right: 20px;
+		padding-bottom: 50px;
+		padding-left: 20px;
+		 */
+	}
+</style>
+</head>
+<body>
+	<span>padding 속성을 설정하지 않은 요소</span><br><br><br><br>
+	<span class="pad">padding 속성값을 방향별로 따로 설정한 요소</span>
+</body>
+</html>
+```
 
+- 테두리(border) 속성은 내용과 패딩 영역을 둘러싸는 테두리의 스타일을 설정함.
+- 테두리의 속성 종류
+  - border
+    - 태그의 테두리를 설정하는 속성.
+    - 세부적인 속성들을 한 번에 쓸 수 있음.
+    - (border: border-width border-style border-color)
+  - border-style
+  - border-width
+  - border-color
+  - border-top
+  - border-right
+  - border-bottom
+  - border-left
 
+```html
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>테두리 꾸미기</title>
+<style>
+	div {
+		background-color: darkgray;
+		color: white;
+		width: 450px;
+		padding: 30px;
+		border: 20px solid teal;
+		margin: 50px;
+	}
+</style>
+</head>
+<body>
+	<div>Alice in Wonderland<br><br>
+		When Alice follows the White Rabbit down a rabbit hole, she finds herself in a land where she can change her size. She meets a Duchess with a pig for a baby, a Cook that throws spoons, a wise but mad Cheshire cat, the March Hare, Mad Hatter and a Dormouse. A Caterpillar shows her how to adjust her height by eating from the right and left sides of a mushroom.
+	</div>
+</body>
+</html>
+```
 
 
 
 ### 3.8. CSS 디버깅과 개발자 도구
 
-
-
-
-
-
+- 의도치 않은 형태로 화면이 출력될 경우 코드의 내용만 보고 문제를 찾아내기 어려움. 웹브라우저들은 디버깅을 위한 '개발자 도구'를 내장하고 있음.
+- 크롬 브라우저는 F12
 
 
 
 ## 4. 디자인을 위한 고급 스타일 효과
 
-
-
-
+- CSS는 화면을 고급스럽게 꾸밀 수 있게 고급 스타일을 지원함. 그림자 효과, 그래디언트, 내비게이션, 드롭 박스, 갤러리, 썸네일, 툴팁 등을 사용할 수 있음.
 
 
 
 ### 4.1. Shadow와 Gradient
 
+- 이미지나 텍스트에 그림자(Shadow) 효과를 주고 싶을 때 CSS3의 text-shadow 속성 또는 box-shadow 속성을 사용함.
+- text-shadow와 box-shadow의 속성값
+  - h-shadow : 수평 그림자 위치. 값이 +이면 오른쪽으로 생김.
+  - v-shadow : 수직 그림자 위치. 값이 +이면 아래쪽으로 생김.
+  - blur-radius : 흐림 반경. 0이 가장 진하고 숫자 높아질수록 점점 흐려짐.
+  - spread-distance : 확산 거리. 값이 +이면 그림자의 크기가 확대됨.
+  - color : 컬러
 
+```html
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>그림자 만들기</title>
+<style>
+	.shadow1 { text-shadow: 2px 2px; }
+	.shadow2 { text-shadow: 2px 2px 10px ; }
+	.shadow3 { text-shadow: 0 0 3px red; }
+	.shadow4 { text-shadow: 2px 2px 10px green; }
+	.shadow5 { color: white; text-shadow: 1px 1px 2px black, 0 0 20px purple, 0 0 5px maroon; }
+	</style>
+</head>
+<body>
+	<div class="shadow1">Black Shadow Effect</div><br>
+	<div class="shadow2">Cloudy Shadow Effect</div><br>
+	<div class="shadow3">Neon Effect</div><br>
+	<div class="shadow4">Color Shadow Effect</div><br>
+	<div class="shadow5">Shadow Overlay Effect</div>
+</body>
+</html>
+```
 
+- 그래디언트(Gradient)는 2가지 이상의 색상을 혼합하여 부드러운 색감으로 배경 등을 표현하는 것.
+- 이미지를 사용하지 않고 div 또는 특정 태그의 배경에 그래디언트 효과를 넣을 수 있음.
+- 그래디언트의 종류
+  - 선형 그래디언트(linear gradients)
+    - 선형으로 그래디언트 효과를 나타냄.
+    - 최소한 두 개 이상의 색상 지정점이 필요함.
+    - background : linear-gradient (direction, color1, color2 ...);
+    - background : linear-gradient (angle, color1, color2 ...);
+  - 원형 그래디언트(radial gradients)
+    - 원 또는 타원의 중심에서부터 바깥쪽으로 색상이 바뀜.
+    - background : radial-gradient(모양/크기 및 위치, 출발색, 중간색 ... 종료색)
+  - direction은 방향, to bottom은 위에서 아래로(기본값) 그래디언트를 만듦.
+  - angle은 각도(0deg, 180deg 등)로 방향을 설정해서 그래디언트를 만듦.
 
+```html
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>선형 그래디언트</title>
+<style>
+	.grad{
+	  width: 200px;
+	  height: 100px;
+	  background: linear-gradient( to bottom, yellow, red );
+	}
+</style>
+</head>
+<body>
+	<div class="grad"></div>
+</body>
+</html>
+```
+
+```html
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>원형 그래디언트</title>
+<style>
+	.circle {
+	  width: 200px;
+	  height: 200px;
+	  background: radial-gradient(circle, yellow, green);
+	}                              /*원모양    출발색      끝색*/
+	.ellipse {
+	  width: 300px;
+	  height: 100px;
+	  background: radial-gradient(ellipse,yellow, green);
+	}                              /*타원모양   출발색      끝색*/
+</style>
+</head>
+<body>
+	<div class="circle"></div><br>
+	<div class="ellipse"></div>
+</body>
+</html>
+```
 
 
 
 ### 4.2. Navigation과 Dropdown
 
+- Navigation과 Dropdown은 웹페이지의 메뉴바를 만들 때 주로 이용함.
+- 메뉴바는 상단 또는 왼쪽에 만듦.
 
+```html
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>메뉴 바 만들기</title>
+<style>
+	body {
+	    margin: 0;
+	}
+	.header {
+	    padding: 5px;
+	    text-align: center;
+	    background-image:url("image/back.png");
+	    border-bottom: 1px solid #bdbdbd;
+	    color:navy;
+	}
+	ul {
+	    list-style-type: none;
+	    margin: 0;
+	    padding: 0;
+	    width: 100px;
+	    background-color: white;
+	    position: fixed;
+	    height: 100%;
+	    overflow: auto;
+	}
+	li a {
+	    display: block;
+	    color: #000;
+	    padding: 8px 16px;
+	    text-decoration: none;
+	}
+	li a:hover{
+	    background-color: #555;
+	    color: white;
+	}
+</style>
+</head>
 
+<body>
+	<div class="header">
+		<h1>Web Site Name</h1>
+	</div>
+	<ul>
+		<li><a href="#main">메일</a></li>
+		<li><a href="#cafe">카페</a></li>
+		<li><a href="#blog">블로그</a></li>
+		<li><a href="#shopping">쇼핑</a></li>
+	</ul>
+</body>
+</html>
+```
 
+- 28라인에서 display를 블록으로 처리. 요소 하나하나를 블록으로 처리하기 때문에 줄을 바꿔서 다음 요소를 출력함.
+
+```html
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>드롭 다운 메뉴바 만들기</title>
+<style>
+	ul {
+	    list-style-type: none;
+	    margin: 0;
+	    padding: 0;
+	    overflow: hidden;
+	    background-color: rgb(53,94,169);
+	    /* background-color:  #999 ; */
+	}
+	li {
+	    float: left;
+	}
+	li a, .dropbtn {
+	    display: inline-block;
+	    color: white;
+	    text-align: center;
+	    padding: 14px 16px;
+	    text-decoration: none;
+	}
+	li a:hover, .dropdown:hover .dropbtn {
+	    /* background-color: red; */
+	    background-color: #6799FF;
+	}
+	li.dropdown {
+	    display: inline-block;
+	}
+	li a.active, a.active:hover{
+	    /* background-color: #4CAF50; */
+	    background-color: #6799FF;
+	}
+	.dropdown-content {
+	    display: none;
+	    position: absolute;
+	    background-color: #f9f9f9;
+	    min-width: 160px;
+	    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+	    z-index: 1;
+	}
+	.dropdown-content a {
+	    color: black;
+	    padding: 12px 16px;
+	    text-decoration: none;
+	    display: block;
+	    text-align: left;
+	}
+	.dropdown-content a:hover {background-color: #f1f1f1}
+	.dropdown:hover .dropdown-content {
+	    display: block;
+	}
+</style>
+</head>
+<body>
+	<ul>
+		  <li><a href="#home">Home</a></li>
+		  <li><a href="#mail">메일</a></li>
+		  <li><a href="#cafe">카페</a></li>
+		  <li><a href="#blog">블로그</a></li>
+		  <li class="dropdown">
+			    <a href="#shopping" class="dropbtn">쇼핑</a>
+			    <div class="dropdown-content">
+				      <a href="#">가전제품</a>
+				      <a href="#">의류/악세사리</a>
+				      <a href="#">가방/신발</a>
+			    </div>
+		  </li>
+		  <li class="dropdown">
+			    <a href="#new" class="dropbtn">뉴스</a>
+			    <div class="dropdown-content">
+			      <a href="#">정치</a>
+				      <a href="#">경제</a>
+				      <a href="#">생활/문화</a>
+			    </div>
+		  </li>
+		  <li style="float:right"><a class="active" href="#login">로그인</a></li>
+	</ul>
+</body>
+</html>
+```
 
 
 
 ### 4.3. Gallery
 
+- 갤러리(Gallery)는 이미지와 그림자를 이용하여 폴라로이드 효과를 만듦.
 
+```html
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>이미지를 이용한 폴라로이드 효과 주기</title>
+<style>
+	body {margin:25px;}
+	div.title{
+		width: 300px;
+		text-align:center;
+	}
+	div.polaroid {
+	  width: 300px;
+	  height: 300px;
+	  background-color: white;
+	  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.3), 0 6px 20px 0 rgba(0, 0, 0, 0.15);
+	  margin-bottom: 15px;
+	}
+	div.container {
+	  text-align: center;
+	  padding: 5px 5px;
+	}
+	img{
+		width:100%;
+		height:230px;
+	}
+</style>
+</head>
+<body>
+	<div class="title"><h2>따라 그리는 명화</h2></div>
+	<div class="polaroid">
+		<img src="image/pic1.jpg" alt="WorkOfArt_1">
+		<div class="container">
+			<p>카드놀이 하는 사람들 (미니 作)</p>
+		</div>
+	</div>
+	  
+	<div class="polaroid">
+		<img src="image/pic2.jpg" alt="WorkOfArt_2">
+		<div class="container">
+			<p>길가의 집 (미니 作)</p>
+		</div>
+	</div>
+</body>
+</html>
+```
+
+```html
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>이미지 갤러리 만들기</title>
+<style>
+	div.gallery {
+	    margin: 5px;
+	    border: 1px solid #ccc;
+	    float: left;
+	    width: 180px;
+	}
+	
+	div.gallery:hover {
+	    border: 1px solid #777;
+	    opacity: 0.3;
+	}
+	
+	div.gallery img {
+	    width: 100%;
+	    height: auto;
+	}
+	
+	div.desc {
+	    padding: 15px;
+	    text-align: center;
+	}
+</style>
+</head>
+<body>
+	<div class="gallery">
+	  <a target="_blank" href="image/01.jpg">
+	    <img src="image/01.jpg" alt="evening glow" width="300" height="200">
+	  </a>
+	  <div class="desc">Evening Glow</div>
+	</div>
+	
+	<div class="gallery">
+	  <a target="_blank" href="image/02.jpg">
+	    <img src="image/02.jpg" alt="lakeside" width="600" height="400">
+	  </a>
+	  <div class="desc">Lake Side</div>
+	</div>
+	
+	<div class="gallery">
+	  <a target="_blank" href="image/03.jpg">
+	    <img src="image/03.jpg" alt="sea" width="600" height="400">
+	  </a>
+	  <div class="desc">Southern Sea</div>
+	</div>
+	
+	<div class="gallery">
+	  <a target="_blank" href="image/04.jpg">
+	    <img src="image/04.jpg" alt="coast road" width="600" height="400">
+	  </a>
+	  <div class="desc">Coast Road</div>
+	</div>
+</body>
+</html>
+```
 
 
 
