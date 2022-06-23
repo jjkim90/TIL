@@ -24,16 +24,16 @@
 - null도 저장이 가능하며, 이 경우 해당 인덱스는 객체를 참조하지 않음.
 
 - List 컬렉션에서 공통적으로 사용 가능한 List 인터페이스의 메소드
-  - boolean add(E e) : 주어진 객체를 맨 끝에 추가함.
-  - void add(int index, E element) : 주어진 인덱스에 객체를 추가함.
-  - E set(int index, E element) : 주어진 인덱스에 저장된 객체를 주어진 객체로 바꿈.
-  - boolean contains(Object o) : 주어진 객체가 저장되어 있는지 조사함.
-  - E get(int index) : 주어진 인덱스에 저장된 객체를 리턴함.
-  - boolean isEmpty() : 컬렉션이 비어 있는지 조사함.
-  - int size() : 저장되어 있는 전체 객체 수를 리턴함.
-  - void clear() : 저장된 모든 객체를 삭제함.
-  - E remove(int index) : 주어진 인덱스에 저장된 객체를 삭제함.
-  - boolean remove(Object o) : 주어진 객체를 삭제함.
+  - `boolean add(E e)` : 주어진 객체를 맨 끝에 추가함.
+  - `void add(int index, E element)` : 주어진 인덱스에 객체를 추가함.
+  - `E set(int index, E element)` : 주어진 인덱스에 저장된 객체를 주어진 객체로 바꿈.
+  - `boolean contains(Object o)` : 주어진 객체가 저장되어 있는지 조사함.
+  - `E get(int index)` : 주어진 인덱스에 저장된 객체를 리턴함.
+  - `boolean isEmpty()` : 컬렉션이 비어 있는지 조사함.
+  - `int size()` : 저장되어 있는 전체 객체 수를 리턴함.
+  - `void clear()` : 저장된 모든 객체를 삭제함.
+  - `E remove(int index)` : 주어진 인덱스에 저장된 객체를 삭제함.
+  - `boolean remove(Object o)` : 주어진 객체를 삭제함.
 - E라는 타입 파라미터는 저장되는 객체의 타입을 List 컬렉션을 생성할 때 결정하라는 뜻.
 
 ```java
@@ -222,7 +222,69 @@ public class LinkedListExample {
 
 ### 1.2. Set 컬렉션
 
+- List 컬렉션은 객체의 저장 순서를 유지하지만, Set 컬렉션은 저장 순서가 유지되지 않음. 또한 객체를 중복해서 저장할 수 없고, 하나의 null만 저장할 수 있음.
+- Set 컬렉션은 수학의 집합과 비슷함. 순서와 상관없고 중복이 허용되지 않음.
+- Set 컬렉션에서 공통적으로 사용 가능한 Set 인터페이스의 메소드
+  - `boolean add(E e)` : 주어진 객체를 저장함. 객체가 성공적으로 저장되면 true를 리턴하고 중복 객체면 false를 리턴함.
+  - `boolean contains(Object o)` : 주어진 객체가 저장되어 있는지 조사함.
+  - `boolean isEmpty()` : 컬렉션이 비어 있는지 조사함.
+  - `Iterator<E> iterator()` : 저장된 객체를 한 번씩 가져오는 반복자를 리턴함.
+  - `int size()` : 저장되어 있는 전체 객체 수를 리턴함.
+  - `void clear()` : 저장된 모든 객체를 삭제함.
+  - `boolean remove(Object o)` : 주어진 객체를 삭제함.
+
+```java
+// Set 컬렉션에 String 객체를 저장, 삭제
+
+Set<String> set = ...;
+set.add("홍길동");
+set.add("김자바");
+set.remove("홍길동");
+```
+
+- Set 컬렉션은 인덱스로 객체를 검색해서 가져오는 메소드가 없음.
+- 전체 객체를 대상으로 한 번씩 반복해서 가져오는 반복자(Iterator)를 제공함.
+- 반복자는 Iterator 인터페이스를 구현한 객체를 말하는데, iterator() 메소드를 호출하면 얻을 수 있음.
+- `Iterator<String> iterator = set.iterator();`
+- Iterator 인터페이스에 선언된 메소드
+  - `boolean hasNext()` : 가져올 객체가 있으면 true를 리턴하고 없으면 false 리턴.
+  - `E next()` : 컬렉션에서 하나의 객체를 가져옴.
+  - `void remove()` : Set 컬렉션에서 객체를 제거함.
+
+```java
+// Set 컬렉션에서 String 객체들을 반복해서 하나씩 가져오는 코드
+
+Set<String> set = ...;
+Iterator<String> iterator = set.iterator();
+while(iterator.hasNext()){
+    //String 객체 하나를 가져옴
+    String str = iterator.next();
+}
+```
+
+- 향상된 for문으로 전체 객체를 대상으로 반복할 수 있음.
+
+```java
+for(String str : set){
+}
+```
+
+- Iterator의 remove() 메소드는 Iterator의 메소드이지만, 실제 Set 컬렉션에서 객체가 제거됨.
+
+
+
 #### HashSet
+
+- HashSet은 Set 인터페이스의 구현 클래스임.
+- HashSet을 생성하기 위해서는 기본 생성자를 호출하면 됨. 
+- `Set<E> set = new HashSet<E>(); `
+- HashSet은 객체들을 순서 없이 저장하고 동일한 객체는 중복 저장하지 않음.
+- HashSet이 판단하는 동일한 객체는 1) hashCode() 리턴값이 같음 -> 2) equals() 리턴값이 같음 을 의미함.
+- String 클래스는 같은 문자열일 경우 hashCode()의 리턴값은 같게, equals()의 리턴값은 true가 나오도록 hashCode()와 equals() 메소드를 재정의함.
+
+
+
+
 
 ### 1.3. Map 컬렉션
 
@@ -244,4 +306,6 @@ public class LinkedListExample {
 
 # References
 
-- [혼자 공부하는 자바 / 신용권 / 한빛미디어 / 2019](
+- [혼자 공부하는 자바 / 신용권 / 한빛미디어 / 2019](http://www.kyobobook.co.kr/product/detailViewKor.laf?ejkGb=KOR&mallGb=KOR&barcode=9791162241875&orderClick=LAG&Kc=)
+
+<br>
