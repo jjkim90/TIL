@@ -42,7 +42,7 @@
 
 <br>
 
-- [CHAPTER 12 스레드](#chapter-12----)
+- [CHAPTER 12 스레드](Thread.md)
 
 <br>
 
