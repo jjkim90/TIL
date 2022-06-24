@@ -878,11 +878,210 @@ function divifunc(){
 
 #### String 객체
 
+- String 객체는 문자열을 다루는 객체.
+- 문자열은 단일 따옴표(' ') 또는 이중 따옴표(" ") 안에 작성함.
+- 자바스크립트에서 문자열은 주로 리터럴을 사용함.
+- new 연산자로 String 객체를 생성해서 사용하기도 함.
+- `var 변수명 = new String("문자열");` 또는 `var 변수명 = "문자열";`
+- String 속성과 문자 관련 메소드
+  - `length` : 문자열의 길이를 구함.
+  - `big() / small()` : 문자를 한 단계 크게 / 작게 설정함.
+  - `blink()` : 문자를 깜박이게 설정함.
+  - `bold()` : 문자를 굵게 설정함.
+  - `sub() / sup()` : 아래 첨자 / 위 첨자로 설정함.
+  - `fontsize(크기)` : 문자의 크기를 설정함. (범위 : 1-7)
+  - `fontcolor(색상)` : 문자의 색상을 설정함.
+  - `toLowerCase()` : 문자를 소문자로 변경.
+  - `toUpperCase()` : 문자를 대문자로 변경.
+  - `anchor('#위치표시문자')` : \<a name=" ">과 같은 효과.
+  - `link('링크할 위치')` : \<a href= " ">과 같은 효과.
+  - `italics() / strike()` : 이탤릭체 / 취소선 설정.
+
+- String 문자열 관련 메소드
+  - `charAt(n)` : n번째 위치의 문자를 반환함.
+  - `indexOf("찾을 문자")` : 처음부터 시작해서 최초로 만나는 "찾을 문자"의 위치를 반환함.
+  - `lastIndexOf("찾을 문자")` : 끝에서부터 시작해서 최초로 만나는 "찾을 문자"의 위치를 반환함.
+  - `substring(n1, n2)` : n1에서 (n2-1) 사이의 문자열을 반환함.
+  - `slice(s, e)` : s부터 (e-1)의 문자열을 분리함.
+  - `substr(s, 길이)` : s부터 길이만큼 문자열을 추출함.
+  - `concat("문자열")` : 두 개의 문자열을 연결함.
+  - `split("기준 문자")` : 기준이 되는 문자로 문자열을 잘라서 배열에 저장.
+  - replace(s1, s2) : 문자열 중 s1을 s2로 치환함.
+
+```html
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>문자열 함수</title>
+<script>
+	var data=new String("javascript test");
+	document.write(data+"<br>");                
+	
+	document.write(data.length+"<br>");         
+	document.write(data.toLowerCase()+"<br>"); 
+	document.write(data.bold()+"<br>");
+	document.write("남가람 북스".link('http://www.namgarambooks.co.kr')+"<br><br>"); 
+	
+	document.write(data.charAt(0)+"<br>");      
+	document.write(data.substring(1,3)+"<br>"); 
+	document.write(data.substring(4)+"<br>"); 
+	document.write(data.replace("test", "sample")+"<br>");
+</script>
+</head>
+<body>
+
+</body>
+</html>
+```
+
+
+
 #### Array 객체
+
+- 배열은 하나의 객체에 여러 개의 데이터 값을 저장할 때 사용함.
+- 같은 타입의 자료만 저장해야 하는 다른 프로그래밍 언어와 달리 서로 다른 타입의 데이터를 저장하는 것이 가능함.
+- 자바스크립트에서 배열을 선언하는 방식은 리터럴과 배열 객체를 사용하는 2가지가 있음.
+- 리터럴 방식은 대괄호를 사용하여 배열 선언과 값을 한 번에 처리함. 가장 일반적인 방식.
+- `var 변수명 = [값1, 값2, ... , 값n];`
+- Array 관련 메소드
+  - `sort()` : 배열 값들을 오름차순으로 정렬함.
+  - `reverse()` : 배열 값들을 역순으로 바꿈.
+  - `concat(array)` : 두 개의 배열을 합하여 하나의 배열로 만듦.
+  - `join([str])` : 배열에 들어 있는 값을 모두 붙여서 하나의 문자열로 만듦.
+  - `push()` : 배열의 마지막에 새로운 원소를 추가함.
+  - `pop()` : 배열의 마지막 원소를 추출. (가장 최근에 push()한 요소)
+
+```html
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>배열 객체</title>
+<script>
+	var fruits=["Banana", "Orange", "Apple", "Mango"];
+	
+	var len=fruits.length;
+	var text="";
+	for (i = 0; i < len; i++) {
+		text += fruits[i] + "<br>";
+	}
+	document.write(text);
+</script>
+</head>
+<body>
+
+</body>
+</html>
+```
+
+- 배열 객체를 선언하는 방식은 new 키워드를 사용해서 객체 선언과 동시에 값을 인자로 추가함.
+
+- `var 변수명 = new Array (값1, 값2, ... , 값n);`
+
+```html
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>배열 객체</title>
+<script>
+	var fruits=new Array("Banana", "Orange", "Apple", "Mango");
+	fruits.sort();
+	document.write(fruits);
+	document.write("<br>");
+	
+	fruits.reverse();
+	document.write(fruits);
+</script>
+</head>
+<body>
+
+</body>
+</html>
+```
+
+
 
 #### Date 객체
 
+- Date 객체는 날짜와 시간에 대한 정보를 제공함.
+- 객체 생성 시 날짜를 지정하지 않으면 시스템에 설정된 날짜와 시간을 제공함.
+- `var 변수명 = new Date();` 또는 `var 변수 = new Date(년, 월, 일, 시, 분, 초);`
+- 날짜와 시간 관련 메소드
+  - `setFullYear() / getFullYear()` : 연도만 설정하거나 반환.
+  - `setMonth() / getMonth()` : 월만 설정하거나 반환.
+  - `setDate() / getDate()` : 일(월 기준)을 설정하거나 반환.
+  - `setDay() / getDay()` : 일(주 기준)을 설정하거나 반환.
+  - `setHour() / getHour()`  : 시간을 설정하거나 반환.
+  - `setMinutes() / getMinutes() ` : 분을 설정하거나 반환.
+  - `setSeconds() / getSeconds()` : 초를 설정하거나 반환.
+  - `setMiliseconds() / getMiliseconds()` : 밀리 초를 설정하거나 반환.
+  - `toString()` : 날짜를 문자형식으로 반환.
+
+```html
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>날짜 함수</title>
+<script>
+	var days=new Array("일","월","화","수","목","금","토");
+	var date=new Date();
+	document.write("오늘은 " 
+			+date.getFullYear()+"년"
+			+(date.getMonth()+1)+"월"
+			+date.getDate()+"일 "
+			+days[date.getDay()]+"요일 입니다.<br>");
+	
+	document.write("현재시간은 "+date.getHours()+":" 
+			                +date.getMinutes()+":"
+		                    +date.getSeconds()+"입니다.");
+</script>
+<body>
+
+</body>
+</html>
+```
+
+
+
 #### Math 객체
+
+- Math 객체는 수학에서 자주 사용하는 메소드를 미리 정의해놓은 객체.
+- 최대값/최소값을 구하거나 거듭제곱, 제곱근 등의 특정 공식을 사용할 수 있음.
+- 단순한 계산이 아닌 경우 Math 객체의 메소드를 사용하면 매우 편리함.
+- 수학 관련 메소드
+  - `max(n1, n2, ...)` : 가장 큰 값을 반환.
+  - `min(n1, n2, ...)` : 가장 작은 값을 반환.
+  - `round(n)` : 반올림 값을 반환.
+  - `ceil(n)` : 올림 값을 반환.
+  - `floor(n)` : 내림 값을 반환.
+  - `abs(n)` : 절댓값을 반환.
+  - `random(n)` : 0~1 사이의 임의의 수를 반환.
+  - `pow()` : 숫자의 거듭제곱을 계산해서 반환.
+
+```html
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Math 객체</title>
+<script>
+	document.write(Math.pow(8, 2)+"<br>");  
+	document.write(Math.random()+"<br>");   
+	document.write(Math.floor(4.7)+"<br>"); 
+	document.write(Math.ceil(4.4)+"<br>");  
+	document.write(Math.round(4.7)+"<br>"); 
+	document.write(Math.abs(-4.4)+"<br>");  
+	document.write(Math.sqrt(64)+"<br>");   
+</script>
+</head>
+<body>
+
+</body>
+</html>
+```
 
 
 
