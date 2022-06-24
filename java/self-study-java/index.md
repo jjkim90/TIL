@@ -46,7 +46,7 @@
 
 <br>
 
-- [CHAPTER 13 컬렉션 프레임워크](#chapter-13----------)
+- [CHAPTER 13 컬렉션 프레임워크](Collection-Framework.md)
 
 <br>
 
