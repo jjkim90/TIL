@@ -45,9 +45,10 @@
 
 - [(RT)모두의 네트워크](network/everybodys-network.md)
 
-Database
+### Database
 
 - [(RT)Do It! 오라클로 배우는 데이터베이스 ](database/do-it-oracle-db/index.md)
+- [(RT)데이터베이스 첫걸음](database/Database-First-Step.md)
 
 ### HTML
 
