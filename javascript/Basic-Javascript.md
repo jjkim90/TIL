@@ -874,7 +874,7 @@ function divifunc(){
 </html>
 ```
 
-
+<br>
 
 #### String 객체
 
@@ -1087,35 +1087,577 @@ function divifunc(){
 
 ### 2.3. 브라우저 객체 모델(BOM)
 
+- 브라우저 객체 모델(Browser Object Model)은 웹 브라우저와 관련된 모든 객체들의 집합을 말함.
+- 브라우저 객체 모델의 종류
+  - location 객체 : URL의 정보를 제공해 줌.
+  - navigator 객체 : 현재 실행 중인 브라우저의 정보를 제공해 줌.
+  - history 객체 : 방문 기록에 대한 정보를 제공해 줌.
+  - screen 객체 : 모니터의 정보를 제공해 줌.
+  - document 객체 : 문서에 대한 정보를 제공해 줌.
+- 브라우저 객체 모델은 문서 객체 모델(DOM)과 달리 W3C가 제공하는 표준 객체 모델은 아님.
+
+
+
 #### window 객체
+
+- window 객체는 브라우저 객체 모델의 최상위 객체.
+- window 객체는 전역 객체(Global Object)임.
+- 메소드를 통해 window의 형태와 위치를 변경할 수 있음.
+- window는 생략 가능함.
+- window 객체 메소드
+  - open() : 새로운 윈도우 객체를 생성.
+  - alert() : 경고창을 띄움.
+  - prompt() : 입력창을 띄움.
+  - confirm() : 확인/취소 창을 띄움.
+  - setInterval() : 일정 시간마다 실행함.
+  - setTimeout() : 타이머의 시간이 만료된 후 실행문을 수행함.
+  - moveBy(x, y) : 윈도우를 현재 위치에서 상대적 위치로 이동함.
+  - moveTo(x, y) : 윈도우를 현재 위치와 상관없이 절대적 위치로 이동함.
+  - resizeBy(x, y) : 윈도우의 화면을 현재 크기에서 (x, y)만큼 증가시킴(상대적)
+  - resizeTo(x, y) : 윈도우의 화면을 (x, y) 크기로 함. (절대적)
+  - scrollBy(x, y) : 윈도우 스크롤의 위치를 상대 위치로 이동함.
+  - scrollTo(x, y) : 윈도우 스크롤의 위치를 절대 위치로 이동함.
+  - focus() : 윈도우에 초점을 맞춤.
+  - blur() : 윈도우에 초점을 제거함.
+  - close() : 윈도우를 닫음.
+
+```html
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>window 객체</title>
+<script>
+window.onload=function(){
+	var win=window.open('win1.html','','width=300,height=200');
+	win.moveTo(100,100);
+	
+	window.setInterval(function(){
+		win.moveBy(20,20);
+	},1000);
+	
+	window.setTimeout(function(){
+		win.close();
+	},5000);
+}
+</script>
+</head>
+<body>
+</body>
+</html>
+```
+
+
 
 #### location 객체
 
+- location 객체는 URL과 관련된 인터넷의 주소와 관련된 속성임.
+- 프로토콜, 호스트 이름, 문서 주소 등의 정보가 있음.
+- location 객체 속성
+  - href `localhost:80/index.html` : 문서의 url 주소를 반환함.
+  - host `localhost:80` : 호스트 이름과 포트 번호를 반환함.
+  - hostname `localhost` : 호스트 이름을 반환함.
+  - port `80` : 포트 번호를 반환함.
+  - pathname `/docs/index.html` : 파일 경로를 반환함
+  - hash `http://localhost:80/#test` : 앵커의 이름
+  - search `?param=100` : 요청 값(쿼리)을 반환함
+  - protocol `http://` : 프로토콜을 반환함.
+- location 객체 메소드
+- reload() : 화면을 "새로고침"함.
+- replace(link) : 현재 페이지를 새로운 페이지로 바꿈.
+
+```html
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>location 객체</title>
+<script>
+	var t=new Date();
+	document.write(t.getHours()+":"+t.getMinutes()+":"+t.getSeconds());
+	setInterval(function(){
+		location.reload();
+	},1000);
+</script>
+</head>
+<body>
+
+</body>
+</html>
+```
+
+```html
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>location 객체</title>
+<script>
+	function process(){
+		var name=frm.name.value;
+		var phone=frm.phone.value;
+		location.href="win2.html?"+name+"&"+phone;
+	}
+</script>
+</head>
+<body>
+	<form name="frm">
+	사용자명 : <input type="text" name="name">
+	전화번호 : <input type="text" name="phone">
+	<input type="button" onclick="process()" value="보내기">
+	</form>
+</body>
+</html>
+```
+
+```html
+<!-- win2.html 데이터를 수신한 파일 -->
+
+<script>
+	document.write("주소: " + location.href + "<br>");
+    document.write("프로토콜: " + location.protocol + "<br>");
+    document.write("호스트: " + location.host + "<br>");
+    document.write("파일 경로명:" + location.pathname + "<br>");
+    document.write("호스트: " + location.search + "<br>");
+</script>
+```
+
+
+
 #### navigator 객체
+
+- navigator 객체는 웹 브라우저에 대한 정보를 제공하는 객체.
+- 브라우저의 종류나 버전 정보를 파악하기 위해 사용.
+- 반응형 웹 개발 시 자주 사용함.
+
+- navigation 객체 속성
+  - appCodeName
+  - appName
+  - language
+  - product
+  - platform
+
+```html
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>navigator 객체</title>
+<script>
+	document.write("브라우저 명: " + navigator.appName+ "<br>");
+	document.write("코드명: " + navigator.appCodeName +"<br>");
+	document.write("운영체제: " + navigator.platform + "<br>");
+	document.write("사용 언어: " + navigator.language + "<br>");
+	document.write("사용 엔진: " + navigator.product);
+</script>
+</head>
+<body>
+
+</body>
+</html>
+```
+
+- appName, appCodeName 이제 지원 안함. 브라우저 확인은 navigator.userAgent
+
+
 
 #### history 객체
 
+- history 객체는 인터넷 방문 기록에 대한 정보를 제공하는 객체
+- history 객체의 메소드
+  - go(숫자)
+  - back()
+  - forward()
+  - length
+
+```html
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>history 객체</title>
+<script>
+	document.write("방문한 페이지 수:" + history.length);
+</script>
+</head>
+<body>
+<h3>History 객체 연습(첫 번째 페이지)</h3>
+<a href="test1.html">다음 페이지</a><br><br>
+<input type="button" value="이전으로" onclick="javascript:history.back()">
+<input type="button" value="다음으로" onclick="javascript:history.forward()">
+<input type="button" value="처음으로" onclick="javascript:history.go(-2)">
+</body>
+</html>
+
+<!-- [test1.html] -->
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>history 객체</title>
+<script>
+document.write("방문한 페이지 수:" + history.length);
+</script>
+</head>
+<body>
+<h3>History 객체 연습(두 번째 페이지)</h3>
+<a href="test2.html">다음 페이지</a><br><br>
+<input type="button" value="이전으로" onclick="javascript:history.back()">
+<input type="button" value="다음으로" onclick="javascript:history.forward()">
+<input type="button" value="처음으로" onclick="javascript:history.go(-2)">
+</body>
+</html>
+
+<!-- [test2.html] -->
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>history 객체</title>
+<script>
+document.write("방문한 페이지 수:" + history.length);
+</script>
+</head>
+<body>
+<h3>History 객체 연습(세 번째 페이지)</h3><br><br>
+<input type="button" value="이전으로" onclick="javascript:history.back()">
+<input type="button" value="다음으로" onclick="javascript:history.forward()">
+<input type="button" value="처음으로" onclick="javascript:history.go(-2)">
+</body>
+</html>
+```
+
+
+
 #### screen 객체
+
+- screen 객체는 현재 화면의 해상도나 색상, 화면의 크기 정보 등의 속성을 제공하는 객체.
+- screen 객체 속성
+  - width : 전체 화면의 너비
+  - height : 전체 화면의 높이
+  - availWidth : 전체 화면에서 사용 가능한 화면의 너비(작업 표시줄 제외)
+  - availHeight : 전체 화면에서 사용 가능한 화면의 높이(작업 표시줄 제외)
+  - colorDepth : 이미지를 표시하기 위한 색상 팔레트 비트의 깊이(픽셀 당 비트 수)
+  - pixelDepth : 화면의 색상 해상도(픽셀 당 비트 수)
+
+```html
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>screen 객체</title>
+<script>
+	document.write("전체 화면에서 사용 가능한 너비:"+screen.availWidth+"<br>");
+	document.write("전체 화면에서 사용 가능한 높이:"+screen.availHeight+"<br>");
+	document.write("전체 화면의 너비:"+screen.width+"<br>");
+	document.write("전체 화면의 높이:"+screen.height+"<br>");
+	document.write("색상 팔레트 비트 수:"+screen.colorDepth+"<br>");
+	document.write("한 픽셀당 비트 수:"+screen.pixelDepth+"<br>");
+</script>
+</head>
+<body>
+
+</body>
+</html>
+```
 
 
 
 ### 2.4. 문서 객체 모델(DOM)
 
+- 문서 객체 모델(Document Object Model)은 document와 관련된 집합임.
+- 문서 객체 모델을 사용해서 HTML 페이지에 태그를 추가, 제거, 수정할 수 있음.
+- DOM은 반드시 HTML만 가능한 것은 아니고 HTML, XML, 사용자 정의 등 다양함.
+- document 객체의 요소를 추출하는 메소드 선택자는 크게 두 가지로 구분함.
+  - 요소의 속성명으로 선택해 오는 원거리 선택자
+  - 가까이에 있는 요소를 선택하는 근거리 선택자
+- document 원거리 선택자
+  - getElementById("id명") : 태그의 id 명이 일치하는 문서 객체를 가져오는 선택자.
+  - getElementsByName("name명") : 태그의 name 명이 일치하는 문서 객체를 가져오는 선택자.
+  - getElementsByTagName("tag명") : 태그의 tag 명이 일치하는 문서 객체를 가져오는 선택자.
+- document 속성
+  - innerText : 요소의 내용을 Text로 설정하거나 반환함.
+  - innerHTML : 요소의 내용을 HTML로 설정하거나 반환함.
+
+```html
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>getElementById</title>
+<script>
+	function process1(){
+		var ob=document.getElementById("txt").value;
+		document.getElementById("view1").innerText=ob;
+	}
+	function process2(){
+		var ob=document.getElementById("txt").value;
+		document.getElementById("view2").innerHTML=ob;
+	}
+</script>
+</head>
+<body>
+	<input type="text" id="txt" size="50" name="text">
+	<input type="button" value="출력1" onclick="process1()">
+	<input type="button" value="출력2" onclick="process2()">
+	<br><br><br>
+	<div id="view1"></div>
+	<div id="view2"></div>
+</body>
+</html>
+```
+
+- `<span style="color: red;">good morning</span>` 출력 1에서는 텍스트 그대로 출력되고 출력 2에서는 HTML 형태로 출력됨.
+
+```HTML
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>getElementsByName</title>
+<script>
+	function choice(){
+	    var size = document.getElementsByName("check").length;
+	    var text="내가 좋아하는 과일은 ";
+	    for(var i = 0; i < size; i++){
+	        if(document.getElementsByName("check")[i].checked == true){
+	            text += (document.getElementsByName("check")[i].value);
+	            text += "&nbsp;&nbsp;";
+	        }
+	        
+	    }
+	    text += "입니다";
+	    document.getElementById("demo").innerHTML=text;
+	}
+</script>
+
+</head>
+<body>
+ 	좋아하는 과일을 선택하시오
+	<input type='button' onclick='choice()' value='선택'><br>
+	<input type='checkbox' name='check' value='orange'>orange<br>
+	<input type='checkbox' name='check' value='apple'>apple<br>
+	<input type='checkbox' name='check' value='banana'>banana<br>
+	<input type='checkbox' name='check' value='melon'>melon<br><br>
+	
+	<div id="demo"></div>
+</body>
+</html>
+```
+
+```html
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script>
+	function choice() {
+	    var x = document.getElementsByTagName("li");
+	    var text="";
+	    for(i=0; i<x.length; i++){
+			text += x[i].innerHTML;   
+			text += "&nbsp;&nbsp;"
+	    }
+	    document.getElementById("demo").innerHTML = text;
+	}
+</script>
+</head>
+<body>
+<button onclick="choice()">클릭하시오</button><br>
+<ul>
+  <li>아메리카노</li>
+  <li>카페라테</li>
+  <li>콜드브르</li>
+</ul>
+<div id="demo"></div>
+</body>
+</html>
+```
+
+- DOM 객체가 제공하는 근거리 선택자
+  - ownerDocument
+  - parentNode
+  - childNodes
+  - children
+  - firstChild
+  - lastChild
+  - previousSibling
+  - nextSibling
+- Dom 객체 메소드
+  - createElement(tagName)
+  - createTextNode(text)
+  - removeChild(child)
+  - appendChild(node)
+  - setAttribute(name, value)
+  - getAttribute(name)
+
+```html
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>근거리 선택자 이해</title>
+</head>
+<body>
+<strong>머리말</strong><p id="me"><span>가운데</span><a href="">링크</a><img src="image/cat.png"/></p><button>꼬리말</button>
+<hr>
+<script>
+    var me = document.getElementById("me");
+    document.write("topNode : " + me.ownerDocument.nodeName + "<br>");
+    document.write("firstChild : " + me.firstChild.nodeName + "<br>");
+    document.write("lastChild : " + me.lastChild.nodeName + "<br>");
+    document.write("parentNode : " + me.parentNode.nodeName + "<br>");
+    document.write("previousSibling : " + me.previousSibling.nodeName + "<br>");
+    document.write("nextSibling : " + me.nextSibling.nodeName + "<br>");
+</script>
+</body>
+</html>
+```
+
+```html
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>근거리 선택자 활용</title>
+</head>
+<body>
+<ul id="tea">
+    <li>아메리카노</li>
+    <li>카페라테</li>
+    <li>콜드브르</li>
+</ul>
+<hr>
+<script>
+	var tea = document.getElementById("tea");
+	var childs = tea.childNodes;
+	for (var i = 0; i < childs.length;i++) {
+	    if (childs[i].nodeName == "LI")
+	        document.write(i + "번째 데이터 = " + childs[i].firstChild.nodeValue + "<br>");
+	}
+</script> 
+</body>
+</html>
+```
+
 
 
 ### 2.5. 이벤트(Event) 모델
+
+- 이벤트란 키보드 입력, 마우스 킬릭과 같이 사용자가 특정 행위를 했을 때 행위에 대한 결과 동작을 보여주는 것.
+- 이벤트 모델은 사용자의 행위를 예측하고 행위에 대한 처리를 미리 만들어 놓은 함수에 연결해 주는 작업임. 문서 객체에 이벤트를 연결하는 것.
+- 이벤트 모델 구성
+  - 이벤트 이름 click
+  - 이벤트 속성 onclick
+  - 이벤트 핸들러(리스너, 함수) function(){}
 
 #### 인라인 이벤트 모델
 
 #### 고전 이벤트 모델
 
-#### 인터넷 익스플로러 이벤트 모델
-
-#### 표준 이벤트 모델
-
 
 
 ### 2.6. JSON
+
+- JSON(Javascript Object Notation) 객체는 클라이언트와 서버의 통신에서 데이터를 주고받을 때 주로 이용함.
+- 프로그램 종류에 구애 받지 않고 가벼운 텍스트 형태로 만들어졌다는 장점이 있음.
+
+```HTML
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>JSON객체</title>
+<script>
+function init(){
+	var emp={"name":"민들레",
+			"age":"25",
+			"tel":"111-1111",
+			"address":"서울"	
+	};
+	
+	var msg="";
+	msg += "이름:" + emp.name +"<br>"
+	    + "나이:" + emp.age +"<br>"
+	    + "전화:" + emp['tel'] +"<br>"
+	    + "주소:" + emp['address'] +"<br>"
+	    
+	document.getElementById("result").innerHTML=msg;  
+}
+</script>
+</head>
+<body onload="init()">
+	<h2>JSON표기법</h2>
+	<div id="result"></div>
+</body>
+</html>
+```
+
+```html
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>JSON배열</title>
+<script>
+	function init(){
+		var emp = [{"name" : "kim","age" : 30},
+		           {"name" : "lee","age" : 40},
+			       {"name" : "park","age" : 20}];		
+		var msg="";
+		msg += "이름 : " + emp[0].name + "<br>나이 : " + emp[0].age + "<br><br>";
+		msg += "이름 : " + emp[1].name + "<br>나이 : " + emp[1].age + "<br><br>";
+		msg += "이름 : " + emp[2].name + "<br>나이 : " + emp[2].age;
+		document.getElementById("result").innerHTML=msg;  
+	}
+</script>
+</head>
+<body onload="init()">
+<h2> JSON 표기법 </h2>
+<div id="result"></div>
+</body>
+</html>
+```
+
+```html
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>JSON로그인</title>
+<script>
+var emp = { 
+		"id" : "abcd",
+		"pw" : "1234",
+		"name" : "홍길동",
+		"point" : "1250"
+};
+function login(){
+	var a = document.getElementById("id").value;
+	var b = document.getElementById("pw").value;
+	if(emp.id == a && emp.pw == b)
+		document.getElementById("confirm").innerHTML
+		          ="<span style='color:green'>"+emp.name 
+		          + "님 환영합니다.<br>현재 포인트는 "+emp.point + "점 입니다.</span>";
+	else
+		document.getElementById("confirm").innerHTML
+		          ="<span style='color:red'>아이디 또는 비밀번호가 틀립니다.</span>";
+}
+</script>
+</head>
+<body>
+<label for="input">[로그인 화면]</label><br><br>
+<input type="text" id="id"><span>아이디를 입력하시오</span><br>
+<input type="text" id="pw"><span>비밀번호를 입력하시오</span><br>
+<button id="log" onclick="login()">Login</button><br><br>
+<span id="confirm"></span>
+</body>
+</html>
+
+```
+
+
 
 ### 2.7. 정규 표현식
 
@@ -1130,6 +1672,24 @@ function divifunc(){
 
 
 <br>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 # References
 
