@@ -1554,7 +1554,100 @@ document.write("방문한 페이지 수:" + history.length);
 
 #### 인라인 이벤트 모델
 
+- 가장 기본적인 이벤트 연결 방식.
+- 하나의 이벤트에 하나의 핸들러만 연결이 가능함.
+
+```html
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>인라인 이벤트 모델</title>
+<script> 
+	function btnClick(v) { 
+		alert(v); 
+	} 
+</script>
+</head>
+<body>
+	<input type="button" value="클릭1" onclick="alert('클릭1')">
+	<input type="button" value="클릭2" onclick="var str='클릭2'; alert(str);">
+	<input type="button" value="클릭3" onclick="btnClick(value)">
+</body>
+</html>
+```
+
+
+
 #### 고전 이벤트 모델
+
+```html
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>고전 이벤트 모델</title>
+<script> 
+	window.onload = function() { 
+		var btn = document.getElementById('btn1'); 
+		btn1.onclick = function() { 
+			alert('클릭1'); 
+			btn1.onclick = null;     
+		} 
+	}; 
+</script>
+</head>
+<body>
+<input type="button" id="btn1" value="클릭1">
+<input type="button" id="btn2" value="클릭2" onclick="alert('클릭2')">
+</body>
+</html>
+```
+
+
+
+#### 표준 이벤트 모델
+
+- W3C에서 공식 지정한 DOM Level2 모델.
+
+```html
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>표준 이벤트 모델</title>
+<style>
+#box {
+    background-color: orange;
+    border: 1px solid;
+    padding: 5px;
+    color: white;
+    width: 300px;
+    height: 200px;
+}
+</style>
+</head>
+<body>
+<div id="box">
+  <button onclick="addEventHandler()" id="startbtn">시작</button>
+  <button onclick="removeHandler()" id="stopbtn">정지</button>
+</div>
+<p id="demo"></p>
+<script>
+function myFunction() {
+    document.getElementById("demo").innerHTML = "  X좌표:" + event.x 
+                                  + "&nbsp;&nbsp;&nbsp;Y좌표:" + event.y;
+}
+function addEventHandler() {
+    document.getElementById("box").addEventListener("mousemove", myFunction);
+}
+function removeHandler() {
+    document.getElementById("box").removeEventListener("mousemove", myFunction);
+}
+</script>
+</body>
+</html>
+```
 
 
 
@@ -1657,13 +1750,186 @@ function login(){
 
 ```
 
+- JSON 메소드
+  - parse() : JSON 문자열(String 객체)를 JSON 객체(자바스크립트)로 변환.
+  - stringify() : JSON(자바스크립트) 객체를 JSON 문자열(String 객체)로 변환.
+
+```html
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>JSON stringfy와 parse</title>
+<script>
+	user={
+	  name:'admin',
+	  email:'namgarambooks@naver.com',
+	  phone:'032-506-3536'};
+	
+	alert(user);
+	
+	userStr = JSON.stringify(user);
+	alert(userStr);
+	
+	JSON.parse(userStr, function(key,value){
+		alert(key+"  "+value);
+	});
+</script>
+</head>
+<body>
+</body>
+</html>
+```
+
+- stringify() 를 사용하지 않고 객체명을 그대로 사용하면 [object Object]가 출력됨.
+
 
 
 ### 2.7. 정규 표현식
 
+- 정규 표현식(Regular Expression)의 사전적 의미는 특정한 규칙을 가진 문자열의 집합.
+- 정규 표현식은 조합된 문자열이 특정 규칙에 맞게 작성되었는지 찾아내는 검색 패턴.
+  - RegExp 객체를 이용한 생성 `var 객체명 = new RegExp('정규표현식', ['Flag']);`
+  - 정규 표현식 리터럴을 이용한 생성 `var 객체명 = /정규표현식/[Flag];`
+  - [정규 표현식의 패턴](https://developer.mozilla.org/ko/docs/Web/JavaScript/Guide/Regular_Expressions)
+
+```html
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>정규표현식</title>
+<script>
+function process(){
+	var id=document.getElementById("mid").value;
+	var patt=new RegExp("^[a-zA-Z][0-9a-zA-Z]{4,7}$");
+	if(patt.test(id)){
+		alert("성공");
+	}else{
+		alert("다시입력");
+		document.getElementById("mid").value="";
+		document.getElementById("mid").focus();
+	}
+}	
+</script>
+</head>
+<body>
+<label>아이디</label>
+<input type="text" name="mid" id="mid">	
+<input type="button" value="commit" onclick="process()">
+</body>
+</html>
+```
+
+- 정규 표현식 객체.test(테스트할 객체)
+- 두 번째 규칙 문자수 4~7이므로 첫 번째 문자를 포함해서 총 5~8 문자 이내로 작성해야 함.
+
+```html
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>정규표현식</title>
+<script>
+function process(){
+	var date=document.getElementById('hire_date').value;
+	var patt=new RegExp("^[0-9]{4}\-(0[1-9]|1[012])\-(0[1-9]|1[0-9]|2[0-9]|3[01])$");
+
+	if(patt.test(date)){
+		alert("입사축하");
+	}else{
+		alert("다시입력");
+	}
+}	
+</script>
+</head>
+<body>
+<span>입사연월일</span>  <!--예시 : 2014-01-24-->
+<input type="text" name="hire_date" id="hire_date" /> 
+<input type="button" value="commit" onclick="process()" />
+</body>
+</html>
+```
+
 
 
 ## 3. JavaScript와 표준 API 활용
+
+
+
+### 3.1. Audio와 Video API
+
+
+
+#### Audio의 주요 메소드
+
+
+
+#### Video의 주요 메소드
+
+
+
+### 3.2. Canvas API
+
+
+
+### 3.3. Drag & Drop API
+
+
+
+### 3.4. 웹 스토리지(Web Storage) API
+
+
+
+### 3.5. 웹 워커(Web Worker) API
+
+
+
+### 3.6. 웹 소켓(Web Socket) API
+
+
+
+### 3.7. 지오로케이션(Geolocation) API
+
+
+
+#### Maps JavaScript API 인증키 받아오기
+
+
+
+#### Google Map API 연동
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -1672,24 +1938,6 @@ function login(){
 
 
 <br>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 # References
 
