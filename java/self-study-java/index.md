@@ -50,6 +50,6 @@
 
 <br>
 
-- [CHAPTER 14 입출력 스트림](#chapter-14--------)
+- [CHAPTER 14 입출력 스트림](Input-Output-Stream.md)
 
 <br>
