@@ -1,12 +1,18 @@
 # Servlet 프로그래밍
 
+<br>
+
+> 이 문서는 [<한 권으로 끝내는 실무 Java 웹 개발서 - 김정현, 김계희>](http://www.kyobobook.co.kr/product/detailViewKor.laf?mallGb=KOR&ejkGb=KOR&barcode=9791189184025) 책을 보고 정리한 문서입니다.
+
+<br>
+
 ## 1. Servlet의 개요
 
 - Java Servlet은 서버에서 수행되는 웹 프로그래밍 기술로서 Java 언어로 구현하는 기술임.
 - 웹 클라이언트의 요청으로 웹서버에서 수행되는 Java 프로그램임.
 - 구현이 쉽고 처리 성능이 높아 지금까지 가장 많이 활용하는 웹서버 프로그래밍 기술이 되었음.
 
-
+<br>
 
 ### 1.1. Servlet의 구현
 
@@ -21,6 +27,8 @@
   - `service()`
   - `doGet()`
   - `doPost()`
+
+<br>
 
 #### Eclipse에서 Servlet 클래스 생성 프로세스
 
@@ -72,7 +80,7 @@ public class HelloServlet extends HttpServlet {
 - 18라인은 브라우저로의 모든 출력이 끝나면 사용했던 출력 스트림 객체의 close() 메소드를 호출하여 오픈한 자원을 해제함.
 - 새로 만든 Servlet 클래스의 경우 Tomcat 서버가 바로 인식하지 못하는 관계로 Tomcat 서버를 재시작해야 함. 이미 인식하고 있는 Servlet 클래스를 수정한 경우에는 관계 없음.
 
-
+<br>
 
 #### Servlet의 등록과 매핑
 
@@ -97,7 +105,7 @@ public class HelloServlet extends HttpServlet {
 - Servlet 3.0부터는 위와 같이 web.xml이라는 디스크립터 파일에 Servlet을 등록하고 매핑하는 태그를 작성하는 대신 Servlet 소스 안에 Java의 애노테이션 구문으로 선언하는 방법이 추가되었음.
   - `@WebServlet("/FirstServlet")`
 
-
+<br>
 
 #### Servlet 정의 애노테이션
 
@@ -112,7 +120,7 @@ public class HelloServlet extends HttpServlet {
 - `@WebServlet` 애노테이션은 반드시 사용함.
 - `@WebServlet({"/hello1", "/hello2"})` 처럼 URL mappings 명을 2개 이상 설정하는 것도 가능함.
 
-
+<br>
 
 ### 1.2. Servlet의 수행
 
@@ -138,7 +146,7 @@ public class HelloServlet extends HttpServlet {
   6. 웹서버는 Servlet의 수행 결과로 만들어진 출력 버퍼의 내용으로 HTTP 응답 헤더와 응답 바디를 구성하여 브라우저로 전송함.
 - 웹 컨테이너는 클라이언트에서 전송된 요청 정보를 가지고 HttpServletRequest와 HttpServletResponse 객체를 생성한 후, 요청된 Servlet의 객체가 생성된 상태인지 검사함. 만약 Servlet 객체가 생성되어 있는 상태라면 바로 수행시키고 객체가 생성된 상태가 아니라면 해당 Servlet의 클래스 파일을 찾아서 로딩한 후 객체를 생성하여 수행시킴. 또한 생성된 Servlet 객체는 서버를 종료할 때까지 또는 웹 애플리케이션이 리로드될 때까지 객체 상태를 계속 유지함.
 
-
+<br>
 
 #### Servlet의 최초 요청과 두 번째 이후 요청
 
@@ -147,7 +155,7 @@ public class HelloServlet extends HttpServlet {
 - 두 번째 이후 요청
   - 브라우저의 Servlet 요청 -> service() -> doGet() or doPost() -> 요청 보낸 브라우저로 출력 버퍼의 내용 리턴.
 
-
+<br>
 
 #### Servlet 객체가 메모리에서 해제되는 시점
 
@@ -155,14 +163,14 @@ public class HelloServlet extends HttpServlet {
 - 웹 애플리케이션이 리로드될 때
 - 자동 리로드가 설정된 상태에서 Servlet이 재컴파일되었을 때
 
-
+<br>
 
 #### 여러 브라우저가 하나의 Servlet을 동시에 요청할 때
 
 - 웹 컨테이너가 Servlet 수행을 처리할 때는 다중 스레드 방식을 사용함.
 - 여러 브라우저가 동시 요청하면 각 요청마다 스레드를 구동시켜 병렬로 처리함. 각 요청마다 Servlet 클래스의 객체를 생성하는 것이 아니라 하나의 Servlet 객체를 공유하여 여러 스레드가 병렬로 처리하는 방식임. 적은 메모리로 여러 개의 요청 동시 수행 가능.
 
-
+<br>
 
 #### Servlet의 수행 흐름 점검
 
@@ -200,7 +208,7 @@ public class FlowServlet extends HttpServlet {
 - 여러 번 재요청 해도 service() 메소드 호출만 반복 출력됨.
 - FlowServlet 클래스의 소스를 약간 수정하고 저장하면 이클립스에 의해 Servlet이 재컴파일되고 Tomcat이 edu라는 컨텍스트를 리로딩함. 이때 생성되어 있던 Servlet 객체가 모두 메모리에서 해제되므로 destoy() 메소드 호출 결과를 확인할 수 있음.
 
-
+<br>
 
 #### Servlet의 멤버 변수와 지역 변수 점검
 
@@ -241,7 +249,7 @@ public class MemberLocalServlet extends HttpServlet {
 - 멤버변수 3, 지역변수 1일때 다른 브라우저를 동작시켜서 요청하면 멤버변수 4, 지역변수 1의 출력을 볼 수 있음.
 - 어떠한 브라우저가 요청하든 생성된 Servlet 객체는 재사용됨.
 
-
+<br>
 
 ### 1.3. Servlet의 요청과 응답
 
@@ -281,9 +289,11 @@ public class MemberLocalServlet extends HttpServlet {
     - `getParts()` : 클라이언트에서 전송된 multipart/form-data 형식의 데이터에서 모든 Part 객체들를 추출함.
 - Servlet에서 응답 처리와 관련해서는 HttpServletResponse 객체를 사용함.
 
+<br>
+
 #### 유용한 요청 정보 추출
 
-
+<br>
 
 #### 다양한 타입의 응답 처리
 
@@ -291,7 +301,7 @@ public class MemberLocalServlet extends HttpServlet {
 - setContentType()
 - 문자면 response.getWrite(); 바이너리면 response.getOutputStream
 
-
+<br>
 
 ## 2. Query 문자열 처리
 
@@ -304,6 +314,8 @@ request.getQueryString()
 getParameter(name) -> 밸류 1개
 
 getParameterValues(name) -> 밸류여러개
+
+<br>
 
 ### 2.2. POST 방식 Query 문자열 처리
 
@@ -331,105 +343,404 @@ getParameterValues(name) -> 밸류여러개
 </form>
 ```
 
-
+<br>
 
 ### 2.3. multipart/form-data 처리(파일 업로드)
 
 - 클라이언트의 하드디스크에 존재하는 파일을 선택하여 서버에 전달하는 것을 파일 업로드라고 함.
 
+<br>
+
 #### @MultipartConfig 애노테이션
+
+<br>
 
 #### 멀티 파트 추출 API
 
+<br>
+
 #### multipart/form-data 형식의 데이터 점검
+
+<br>
 
 #### 파일 업로드 기능 구현 점검
 
-
+<br>
 
 ## 3. 상태 정보 관리
 
+- 웹브라우저에서 웹 서버에 정보를 요청하면서 만들어진 결과물을 상태 정보라고 함.
+  - 무상태(Stateless)
+    - 서버가 클라이언트의 상태를 보존하지 않음을 의미함.
+    - 서버의 확장성이 높아 대량의 트래픽 발생 시에도 대처 수월함.
+    - 클라이언트 요청에 상대적으로 Stateful보다 더 많은 데이터 소모됨. (최종 목적을 위해 지나는 과정마다 점점 전달해야 하는 내용이 많아짐.)
+  - 상태 유지(Stateful)
+    - 서버가 클라이언트의 상태를 보존함을 의미함.
+    - 대량의 트래픽이 몰려 서버를 긴급하게 늘려 서버가 바뀔 경우 문제가 발생함.
+- HTTP 프로토콜은 기본적으로 Stateless 무상태 특징을 기본적으로 가지고 있음. 특별한 일이 없다면 무상태를 지향해야 하며 정말 필요한 경우에만 상태 유지를 해야 함.
+
+- 상태 정보 유지 방법
+  - Cookie 기술을 이용한 방법
+  - HttpSession 기술을 이용한 방법 -> Servlet 기술로 구현함.
+  - URL 문자열 뒤에 추가하는 방법
+  - \<form> 태그의 hidden 타입을 사용하는 방법
+
+<br>
+
+#### Cookie 기술 : 클라이언트 저장
+
+- 각 클라이언트별 상태 정보를 브라우저 안에 저장함.
+- 브라우저에 저장하므로 보안이 중요한 정보는 저장하면 안됨.
+- 저장하면서 3년 내의 유효시간을 설정할 수 있음.
+- 저장 위치가 클라이언트이므로 웹서버에 부담이 되지 않는 방법이므로 가벼운 정보를 일정 시간 동안 유지하려는 경우 많이 선택하는 방법임.
+
+<br>
+
+#### HttpSession 기술 : 서버 저장
+
+- 클라이언트별 상태 정보를 웹서버의 HttpSession 객체에 저장함.
+- 서버에 저장하므로 보안이 중요한 정보를 저장할 수 있음.
+- 모든 브라우저의 상태 정보를 웹서버 혼자서 저장하므로 웹서버에 부담이 될 수 있기 때문에 저장을 유지하는 시간은 브라우저가 구동되어 있는 동안으로 제한하고 있음.
+- 서버에 저장하므로 관리가 용이하며 다양한 기능을 구현할 수 있음.
+- 로그인 기능, 쇼핑 카트 기능 등 모두 HttpSession 기술을 사용함.
+
+<br>
+
 ### 3.1. HttpSession 객체를 활용하는 상태 정보 관리
+
+- HttpSession 객체
+  - 세션 객체라고도 함
+  - Servlet 프로그래밍 API 중 하나인 javax.servlet.http 패키지의 HttpSession 인터페이스를 객체로 생성함.
+  - 인터페이스이므로 객체를 생성하려면 팩토리 메소드(대신 객체를 생성해주는 메소드)를 사용해야 함.
+- 팩토리 메소드 특징
+  - HttpSession 객체는 HttpServletRequest 객체의 getSession() 또는 getSession(true)를 호출하여 생성함.
+  - HttpSession 객체는 클라이언트별로 한 개의 객체만 생성됨. 클라이언트에 대한 HttpSession 객체가 생성된 이후에는 더 이상 생성되지 않으며 생성된 객체를 계속 사용함.
+  - HttpSession 객체는 자동 생성되는 것이 아니므로 필요 시 Servlet 프로그램 안에서 직접 생성해서 사용함.
+  - 서버에 생성되는 HttpSession 객체는 세션 ID라고 하는 ID가 한 개 부여되고 이 ID로 HttpSession 객체를 관리함.
+  - 브라우저에 보관되는 세션 ID는 브라우저가 구동되어 있는 동안만 유효함.
+  - 서버에 생성된 HttpSession 객체는 클라이언트로부터의 요청이 일정 시간 전송되지 않으면 자동 삭제됨.
+  - 서버에 생성된 HttpSession 객체는 필요 시 강제 삭제가 가능함.
+  - HttpSession 객체에 보관되는 상태 정보는 객체로 만들어서 유일한 이름과 함께 저장함. 즉, name 과 value 쌍으로 저장함.
+
+<br>
+
+#### HttpSession을 이용한 상태 정보 유지 구현 과정
+
+1. HttpSession 객체를 생성하거나 추출함.
+   `HttpSession session = request.getSession();`
+2. HttpSession 객체에 상태 정보를 보관할 객체를 등록함.(한 번만 등록함)
+   `session.setAttribute("xxx", new Date());`
+3. HttpSession 객체에 등록되어 있는 상태 정보 객체의 참조값을 얻어서 사용함. (읽기, 변경)
+   `Date ref = (Date)session.getAttribute("xxx");`
+4. HttpSession 객체에 등록되어 있는 상태 정보 객체가 더 이상 필요 없으면 삭제할 수도 있음.
+   `session.removeAttribute("xxx");`
+5. HttpSession 객체는 웹서버에 의해 자동 삭제되기도 하지만 필요 시 직접 삭제할 수도 있음.
+   `session.invalidate();`
+
+<br>
+
+#### HttpSession 객체의 생성과 추출
+
+- `getSession()` : HttpSession 객체를 추출하거나 새로 생성함.
+- `getSession(true)` : HttpSession 객체를 추출하거나 새로 생성함.
+- `getSession(false)` : HttpSession 객체를 추출하여 리턴하고 없으면 null을 리턴함.
+
+<br>
+
+#### HttpSession 객체의 ID
+
+- HttpSession 객체가 생성될 때 세션 ID가 하나 부여되며 이 세션 ID는 요청을 보내온 클라이언트의 브라우저에 Cookie 기술을 이용하여 JSESSIONID라는 이름으로 저장되며 브라우저는 서버에 요청을 보낼 때마다 이 Cookie 정보를 요청 헤더에 담아 서버로 전송함.
+- 브라우저에 저장되는 세션 ID에 대한 Cookie는 최대 유지 시간이 브라우저가 구동되어 있는 동안임.
+- 브라우저가 재구동되어 세션 ID를 분실하게 되면 서버에 생성된 HttpSession 객체는 더 이상 사용할 수 없음.
+- 클라이언트로부터 일정 시간 동안 요청이 없는 경우(Inactive Interval Time : 기본 30분)도 서버에 생성된 HttpSession 객체는 더 이상 사용할 수 없음.
+
+<br>
+
+#### HttpSession의 기타 주요 메소드
+
+- `getAttributeNames()` : HttpSession 객체에 등록된 객체들의 이름을 추출함.
+- `getCreationTime()` : HttpSession 객체가 만들어진 시간을 밀리초 단위로 리턴함.
+- `getid()` : HttpSession 객체에 지정된 세션 ID를 리턴함.
+- `getLastAccessedTime()` : 클라 요청이 마지막으로 시도된 시간을 밀리초로 리턴함.
+- `getMaxInactiveInterval()` : 클라의 요구가 없을 때 서버가 현재의 HttpSession 객체를 언제까지 유지할지를 초시간 단위로 리턴함.
+- `isNew()` : HttpSession 객체가 생성된 경우에는 true를 리턴하고 기존의 HttpSession 객체가 유지되고 있는 경우라면 false를 리턴함.
+- `setMaxInactiveInterval(seconds)` : HttpSession 객체의 Inactive Interval Time을 설정함.(초단위)
+
+<br>
+
+#### HttpSession 객체의 생성, 추출, 삭제 구현
+
+```java
+package core;
+import java.io.IOException;
+import java.io.PrintWriter;
+import java.util.Date;
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+@WebServlet("/sessiontest")
+public class SessionTestServlet extends HttpServlet {
+
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		response.setContentType("text/html; charset=utf-8");
+		PrintWriter out = response.getWriter();
+		String command = request.getParameter("comm");
+		HttpSession session = request.getSession();		
+		String msg="";
+		long time = session.getCreationTime();
+		String id = session.getId();
+	   if(command.equals("view")) {
+			if(session.isNew()) {
+				msg = "세션 객체 생성 : "; 
+			} else {
+				msg = "세션 객체 추출 : "; 
+			}
+			msg += "<br>id : " + id + " <br>time : " +
+			                new Date(time);
+		} else if (command.equals("delete")) {
+			session.invalidate();
+			msg = id + "을 id로 갖는 세션 객체 삭제!!";
+		} else {
+			msg = "요청시 Query 문자열로 comm=view 또는 comm=delete 를 "
+					+ "전달해주세요!!";
+		}
+		out.print("<h2>"+ msg+"</h2>");
+		out.close();
+	}
+}
+```
+
+- 17라인은 "comm"이라는 이름으로 전달되는 Query 문자열의 value 값을 추출함. 이 예제는 브라우저에서 요청할 때 URL 문자열 뒤에 comm=view 또는 comm=delete 등의 Query 문자열을 GET 방식으로 전달해야 함.
+- 18라인은 HttpSession 객체를 생성 또는 추출하는 메소드 호출임.
+- 20라인은 HttpSession 객체의 생성 시간을 추출함.
+- 21라인은 생성된 HttpSession 객체의 세션 ID를 추출함.
+- 23라인은 생성된 HttpSession 객체가 이번 요청에서 생성된 것인지 점검함.
+- 30라인은 생성된 HttpSession 객체를 삭제함.
+- 정해진 규격의 Query 문자열을 전달하지 않고 SessionTestServlet을 요청하면 소스 22라인에서 NullPointerException이 발생되어 500 응답 상태 코드 출력됨.
+
+<br>
 
 ### 3.2. HttpSession 객체의 활용
 
+#### 브라우저별 요청 카운트 유지
 
+```java
+package core;
+import java.io.IOException;
+import java.io.PrintWriter;
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+@WebServlet("/CountServlet")
+public class CountServlet extends HttpServlet {
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		response.setContentType("text/html; charset=utf-8");
+		PrintWriter out = response.getWriter();
+		HttpSession session = request.getSession();
+		if(session.getAttribute("cnt") == null) {
+			session.setAttribute("cnt", new int[1]);
+		}
+		int[] count = (int[])session.getAttribute("cnt");
+		count[0]++;
+		out.print("<h3>당신은 "+ count[0] + 
+				                       "번째 방문입니다.</h3>");		
+		out.close();
+	}
+}
+```
+
+<br>
+
+#### HttpSession 객체를 이용해서 로또 응모 횟수 제한하기
+
+```java
+package core;
+
+import java.io.IOException;
+import java.io.PrintWriter;
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+
+@WebServlet("/lottolimit")
+public class LottoServletLimit extends HttpServlet {
+	protected void doGet(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+
+		HttpSession session = request.getSession();
+		if (session.getAttribute("lottocnt") == null) {
+			session.setAttribute("lottocnt", new int[1]);
+		}
+		int[] count = (int[]) session.getAttribute("lottocnt");
+		int answer = (int) (Math.random() * 10) + 1;
+		int input = Integer.parseInt(request.getParameter("guess"));
+
+		String msg = "";
+		if (++count[0] > 3) {
+			msg = "<h3>더이상 응모할 수 없습니다.</h3><h3> 브라우저를 재기동하여 응모하세요.</h3>";
+		} else {
+			if (answer == input) {
+				msg = "<h3>축하합니다... 당첨되었어요!!</h3>";
+				count[0] = 4;
+			} else {
+				msg = "<h3>다음 기회를....</h3><a href='/edu/servletexam/lottolimit.html'>재도전</a>";
+			}
+		}
+		response.setContentType("text/html; charset=utf-8");
+		PrintWriter out = response.getWriter();
+		out.println(msg);
+		out.close();
+	}
+}
+```
+
+```html
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>LottoLimit</title>
+</head>
+<style>
+#title{ color : red;}
+</style>
+<body>
+	<h2 id = "title">로또 번호를 맞춰보세요!!!</h2>
+	<hr>
+	<form method = "get" action = "/edu/lottolimit">
+		1부터 10까지의 숫자를 입력하세요 :
+		<input name = "guess" type="number" min="1" max ="10" required>
+		<input id = "img" type="image" src= "../image/clover.jpg" width=30px>
+	</form>
+</body>
+</html>
+```
+
+<br>
 
 ## 4. 요청 재지정
 
+- 요청 재지정이란 클라이언트에서 요청한 Servlet의 응답 대신 다른 자원(Servlet, JSP, HTML 등)의 수행 결과를 클라이언트에 대신 응답하는 기능.
+- redirect 방법과 forward 방법이 있음.
+- forwad
+  - 클라이언트에서는 요청이 재지정된 사실을 알 수 없음.
+  - 동일 서버에서도 동일 웹 애플리케이션의 자원으로만 요청을 재지정할 수 있음.
+- redirect
+  - 302라는 응답 코드와 재요청할 B자원에 대한 URL 정보를 가지고 응답함.
+  - 302라는 응답 코드의 의미는 "요구한 데이터가 변경된 URL에 있음을 명시"라는 의미임.
+  - 브라우저가 직접 요청하여 응답 받게 되므로 브라우저 주소 필드의 URL 문자열이 B에 대한 내용으로 변경됨.
+  - 클라이언트 사용자는 요청이 재지정된 사실을 알게 됨.
+  - 동일 서버뿐만 아니라 다른 웹사이트의 자원으로도 요청을 재지정할 수 있음. 요청 재지정의 대상에 제한이 없음.
+
+<br>
+
+#### 요청 재지정 구현 시 사용되는 API
+
+- forward
+  - forward 기능으로 요청을 재지정하는 경우에는 RequestDispatcher 객체의 forward() 메소드를 사용함.
+  - RequestDispatcher 객체 생성 시 요청을 재지정할 대상의 URI(컨텍스트 패스를 생략한 URI)를 지정하며 forward() 메소드 호출 시에는 HttpServletRequest 객체와 HttpServletResponse 객체를 전달함.
+  - 동일 웹 애플리케이션의 자원으로만 forward 할 수 있게 제한하기 위하여 컨텍스트 패스를 생략해야 함.
+- redirect
+  - HttpServletResponse 객체의 sendRedirect() 메소드를 사용함.
+  - sendRedirect() 호출 시 아규먼트로 재지정할 대상의 URI 또는 IRL을 설정함.
+
+<br>
+
 ### 4.1. forward를 사용한 요청 재지정
+
+```java
+package core;
+import java.io.IOException;
+import javax.servlet.RequestDispatcher;
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+@WebServlet("/forward")
+public class ForwardServlet extends HttpServlet {
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		System.out.println("ForwardServlet 수행");
+		RequestDispatcher rd = 
+				request.getRequestDispatcher("/edu/servletexam/output.html");
+	/*	RequestDispatcher rd = 
+				request.getRequestDispatcher("http://www.naver.com/");*/
+		rd.forward(request,  response);
+	}
+}
+```
+
+```html
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>forward 요청 재지정</title>
+</head>
+<body>
+	<h3>클라이언트가 요청한 서블릿을 대신하여 응답했어요..</h3>
+</body>
+</html>
+```
+
+- /edu라는 컨텍스트 패스를 생략해야 함. 컨텍스트 패스는 자동으로 추가됨.
+- 만일 /edu/servletexam/output.html과 같이 컨텍스트 패스를 직접 설정하면 /edu/edu/servletexam/output.html과 같이 컨텍스트 패스 /edu가 추가되어 재지정될 대상을 찾을 수 없게 되어 오류가 발생함.
+- 브라우저에서 ForwardServlet을 요청하면 output.html의 콘텐츠 내용이 대신 응답하게 됨. `localhost/edu/forward`
+- forward 되는 대상 URI를 네이버의 IRL 문자열로 변경할 경우 forward 되는 대상을 동일한 웹 애플리케이션 범위 내로 제한함으로 다른 웹사이트는 불가능함. 오류 화면이 응답됨.
+
+<br>
 
 ### 4.2. redirect를 사용한 요청 재지정
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+```java
+package core;
+import java.io.IOException;
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+@WebServlet("/redirect")
+public class RedirectServlet extends HttpServlet {
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		System.out.println("RedirectServlet 수행");
+		response.sendRedirect("/edu/servletexam/output.html");
+		//response.sendRedirect("http://www.naver.com/");
+	}
+}
+```
+
+```html
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>redirect 요청 재지정</title>
+</head>
+<body>
+	<h3>클라이언트가 요청한 서블릿을 대신하여 응답했어요..</h3>
+</body>
+</html>
+```
+
+- 재지정될 대상에 대한 정보는 URI 문자열과 URL 문자열의 제한이 없음.
+- 다른 웹사이트의 URL 문자열도 설정할 수 있음.
+- 브라우저에서 RedirectServlet을 요청하면 output.html의 콘텐츠 내용이 대신 응답함. 
+- 브라우저의 주소 입력 필드에는 RedirectServlet 요청 시 사용된 URL 문자열이 output.html을 요청하는 URL 문자열로 변경됨.
+
+<br>
+
+# References
+
+- [한 권으로 끝내는 실무 Java 웹 개발서 / 김정현, 김계희 / 남가람북스 / 2019](http://www.kyobobook.co.kr/product/detㄴailViewKor.laf?mallGb=KOR&ejkGb=KOR&barcode=9791189184025)
+
+<br>
