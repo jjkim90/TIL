@@ -293,6 +293,85 @@ public class MemberLocalServlet extends HttpServlet {
 
 #### 유용한 요청 정보 추출
 
+```java
+// HttpServletRequest를 사용한 요청 정보 추출
+package core;
+
+import java.io.IOException;
+import java.io.PrintWriter;
+import java.util.regex.Pattern;
+
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+@WebServlet("/requestinfo")
+public class RequestInfoServlet extends HttpServlet {
+	protected void doGet(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		String contextPath = request.getContextPath();
+		String method = request.getMethod();
+		String protocol = request.getProtocol();
+		String remoteAddr = request.getRemoteHost();
+		String requestURI = request.getRequestURI();
+		String requestURL = new String(request.getRequestURL());
+		String serverName = request.getServerName();
+		String userAgent = request.getHeader("user-agent");
+		String referer = request.getHeader("referer");
+		String clientMachine = "";
+		boolean result = Pattern.matches(".*[win16|win32|win64|linux|mac].*", userAgent.toLowerCase());
+        if(result)
+        	clientMachine = "PC";
+        else 
+        	clientMachine = "모바일";
+		String browser = "";
+		if (userAgent.indexOf("Trident") > 0 || userAgent.indexOf("MSIE") > 0) {
+			browser = "IE";
+		} else if (userAgent.indexOf("Opera") > 0) {
+			browser = "Opera";
+		} else if (userAgent.indexOf("Firefox") > 0) {
+			browser = "Firefox";
+		} else if (userAgent.indexOf("Safari") > 0) {
+			if (userAgent.indexOf("Edge") > 0) {
+				browser = "Edge";
+			} else if (userAgent.indexOf("Chrome") > 0) {
+				browser = "Chrome";
+			} else {
+				browser = "Safari";
+			}
+		}
+		response.setContentType("text/html; charset=utf-8");
+		PrintWriter out = response.getWriter();
+		out.println("<h3>요청 정보를 통해서 추출한 내용</h3>");
+		out.println("<ul>");
+		out.println("<li>요청 컨텍스트 패스 : " + contextPath + "</li>");
+		out.println("<li>요청 방식 : " + method + "</li>");
+		out.println("<li>요청 프로토콜 : " + protocol + "</li>");
+		out.println("<li>요청 클라이언트 주소 : " + remoteAddr + "</li>");
+		out.println("<li>요청 URI : " + requestURI + "</li>");
+		out.println("<li>요청 URL : " + requestURL + "</li>");
+		out.println("<li>요청 서버명 : " + serverName + "</li>");
+		out.println("<li>요청 클라이언트 시스템 종류 : " + clientMachine + "</li>");
+		out.println("<li>요청 브라우저 종류 : " + browser + "</li>");
+		out.println("<li>이 콘텐트를 요청한 웹 페이지 : " + referer + "</li>");
+		out.println("</ul>");
+		out.close();
+	}
+}
+
+```
+
+- 요청해온 클라이언트가 PC인지 모바일인지 체크하는 부분과 브라우저의 종류를 체크하는 부분 그리고 Servlet을 요청한 페이지가 누구인지 추출하는 referer 정보도 점검함.
+- 26라인은 referer라는 이름으로 전달되는 요청 헤더 정보를 추출함. 이 요청 헤더 정보는 URL을 입력하여 Servlet을 직접 요청한 경우에는 null이 추출되고 \<a>, \<form> 등 HTML 문서를 통해서 요청되는 경우에는 요청한 HTML 문서에 대한 URL이 추출됨.
+- 27~32라인은 user-agent라는 이름으로 전달되는 요청 헤더 정보를 이용하여 PC용 운영체제로부터의 요청인지 체크함.
+- 33~48라인은 요청을 보내온 브라우저의 종류를 체크함.
+- 테스트용 서버와 클라이언트가 동일 시스템인 관계로 서버의 도메인명에 localhost를 사용하였기 때문에 요청 서버명에 localhost가 그리고 요청 클라이언트 주소에는 0:0:0:0:0:0:0:1(IPv6의 자기 자신을 의미하는 루프백 주소) 출력됨.
+- URI는 Uniform Resource Identity의 약어로 서버에 요청하는 자원에 대한 패스 정보만을 추출하게 됨.
+- 마지막에는 이 Servlet이 요청될 때 다른 자원을 거치치 않고 직접 URL을 입력하여 요청했기 때문에 referer 정보는 null이 추출되는 것을 볼 수 있음.
+- 다른 페이지에서 요청할 경우 RequestInfoServlet을 요청한 페이지의 URL 정보가 추출됨. 이 referer 정보는 이전 페이지로 되돌아가기 기능을 처리할 때 유용하게 사용함.
+
 <br>
 
 #### 다양한 타입의 응답 처리
