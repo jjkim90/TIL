@@ -11,8 +11,8 @@
 - 기본적인 요청과 응답, 화면 출력 등 거의 모든 웹 프로그래밍에 있어 필수임.
 - JSP의 내장 객체는 요청과 응답 혹은 HTTP 헤더 등의 정보를 쉽게 다룰 수 있도록 해줌.
 - 내장 객체는 JSP 페이지가 실행될 때 컨테이너가 자동으로 생성해줌.
-- _jspService() 메소드 안에 객체를 선언하고 초기화하는 선언문들이 들어 있음.
-- 특징
+- _jspService() 메소드 안에 내장 객체를 선언하고 초기화하는 선언문들이 들어 있음.
+- 내장 객체의 특징
   - 컨테이너가 미리 선언해놓은 참조 변수를 이용해 사용함.
   - 별도의 객체 생성 없이 각 내장 객체의 메소드를 사용할 수 있음.
   - JSP 문서 안의 <% 스크립틀릿 %>과 <%= 표현식 %>에서만 사용할 수 있음.
@@ -28,7 +28,7 @@
   - config
   - exception
 
-
+<br>
 
 ## 2. request 객체
 
@@ -39,7 +39,7 @@
   - 클라이언트가 전송한 요청 매개변수에 대한 정보 읽기
   - 요청 헤더 및 쿠키 정보 읽기
 
-
+<br>
 
 #### 클라이언트와 서버의 환경정보 읽기
 
@@ -91,8 +91,6 @@
 
 - 예제용 메인 페이지.
 
-
-
 ```jsp
 <!-- 환경정보 읽기. RequestWebinfo.jsp -->
 <%@ page language="java" contentType="text/html; charset=UTF-8"
@@ -126,7 +124,7 @@
   - `out.close();`
 - JSP에서는 <%= 표현식 %>을 활용하여 훨씬 간편하게 환경정보를 읽을 수 있음.
 
-
+<br>
 
 #### 클라이언트의 요청 매개변수 읽기
 
@@ -167,14 +165,12 @@ String intro = request.getParameter("intro").replace("\r\n", "<br/>");
 - RequestMain.jsp 실행 화면 중 '2. 클라이언트의 요청 매개변수 읽기' 부분에 값을 적당히 입력하고 [전송하기] 버튼을 클릭하면 POST 방식으로 RequestParameter.jsp에 전송됨.
 - POST 방식으로 넘긴 데이터의 한글이 깨질 때는 파라미터를 받는 곳에서 `request.setCharacterEncoding("UTF-8");` 이렇게 UTF-8로 인코딩하면 됨.
 
-
-
 - 전송되는 값이 하나라면 getParameter() 메소드로 받음. 주로 type 속성이 text, radio, password인 경우 사용됨.
 - 전송되는 값이 여러 개라면 getParameterValues() 메소드로 받음. type 속성이 checkbox인 경우 사용됨.
 - 값이 2개 이상이므로 String 배열로 반환함. for문을 이용해 String 배열에 담긴 값들을 하나의 문자열로 합침.
 - textarea 태그는 텍스트를 여러 줄 입력할 수 있으므로 출력 시에 enter 키를 \<br> 태그로 변환해야 줄바꿈이 제대로 반영됨. enter는 특수 기호 \r\n으로 입력됨.
 
-
+<br>
 
 #### HTTP 요청 헤더 정보 읽기
 
@@ -211,7 +207,7 @@ String intro = request.getParameter("intro").replace("\r\n", "<br/>");
 - referer : 리퍼러는 웹을 서핑하면서 링크를 통해 다른 사이트로 방문 시 남는 흔적을 말함. 리퍼러는 웹 사이트 방문객이 어떤 경로로 접속하였는지 알아볼 때 유용함.
 - cookie : 서버와 클라이언트 사이에 존재하는 정보 중 하나. 쿠키는 클라이언트, 세션은 서버가 가지고 있는 정보를 말함.
 
-
+<br>
 
 ## 3. response 객체
 
@@ -221,7 +217,7 @@ String intro = request.getParameter("intro").replace("\r\n", "<br/>");
 - 주요 메소드들은 JSP의 지시어(Directive) 부분에서 설정할 수 있음 (ContentType, Encoding 등)
 - response 객체의 메소드는 https://www.tutorialspoint.com/jsp/jsp_server_response.htm 여기에서 확인 가능.
 
-
+<br>
 
 ### sendRedirect()로 페이지 이동하기
 
@@ -323,7 +319,7 @@ else {
 
 - 로그인 실패 시 화면에는 ResponseMain.jsp의 내용이 출력되었지만, 웹 브라우저의 주소표시줄을 보면 ResponseLogin.jsp로 표시되어 있음. 포워드는 이처럼 실행의 흐름만 특정한 페이지로 넘겨주는 역할을 함.
 
-
+<br>
 
 ### HTTP 헤더에 응답 헤더 추가하기
 
@@ -338,8 +334,6 @@ else {
   - `setDateHeader(String name, long date)` : 설정할 헤더값이 날짜 형식인 경우 사용함.
   - `setHeader(String name, int value)` : 설정할 헤더이름을 name에, 설정할 헤더값을 value에 넣음.
   - `setIntHeader(String name, int value)` : 설정할 헤더이름을 name에, 설정할 헤더값을 value에 넣음.
-
-
 
 ```jsp
 <!-- 응답 헤더에 값 추가하기. ResponseHeader.jsp -->
@@ -398,25 +392,186 @@ response.setHeader("myName", "안중근");  // 수정
 - `int add_int = Integer.parseInt(request.getParameter("add_int"));` -> 폼 text는 숫자로 입력되어도 문자열 타입임. 정수 타입으로 변경.
 - 출력값에 myNumber : 8282가 2번 출력되는데 getHeader() 메소드의 특징임. 중복된 네임의 값이 여러 개여도 첫 번째 값만 출력됨. 실제 개발자 도구에서 헤더를 확인해보면 myNumber : 8282 / myNumber : 1004 두 개의 응답 헤더를 확인할 수 있음.
 
-
+<br>
 
 ## 4. out 객체
 
+- 웹 브라우저에 변수 등의 값을 출력할 때 주로 사용함.
+- 대부분의 상황에서 <%= 표현식 %>이 더 편리하기 때문에 JSP에서 많이 사용되지 않음.
+- <% 스크립틀릿 %> 내에서 변수를 웹 브라우저에 출력해야 한다면 표현식보다는 out 내장 객체를 사용하는 편이 좋음.
+- out 내장 객체는 버퍼를 사용함. 출력되는 모든 정보는 버퍼에 먼저 저장된 후 웹 브라우저에 출력됨.
 
+```jsp
+<!-- out 객체로 값 출력하기. OutMain.jsp -->
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<html>
+<head><title>내장 객체 - out</title></head>
+<body>
+    <%
+    // 버퍼 내용 삭제하기
+    out.print("출력되지 않는 텍스트");  // 버퍼에 저장  
+    out.clearBuffer();  // 버퍼를 비움(윗 줄의 출력 결과 사라짐) 
 
+    out.print("<h2>out 내장 객체</h2>");
 
+    // 버퍼 크기 정보 확인
+    out.print("출력 버퍼의 크기 : " + out.getBufferSize() + "<br>");
+    out.print("남은 버퍼의 크기 : " + out.getRemaining() + "<br>"); 
+
+    out.flush();  // 버퍼 내용 출력 
+    out.print("flush 후 버퍼의 크기 : " + out.getRemaining() + "<br>");
+
+    // 다양한 타입의 값 출력
+    out.print(1);
+    out.print(false);
+    out.print('가');
+    %>
+</body>
+</html>
+```
+
+- 9라인에서 버퍼에 들어간 정보를 10라인에서 clearBuffer() 메소드를 통해 삭제함. 9라인의 문자열은 출력되지 않음.
+- getBufferSize() 메소드는 현재 페이지에 설정된 버퍼의 크기를 가져옴. 버퍼 크기를 page 지시어로 따로 선언하지 않을 경우 기본값인 8KB가 됨.
+- getRemaining() 메소드는 사용하고 남은 버퍼의 크기를 알려줌.
+- flush() 메소드는 버퍼에 담긴 내용을 강제 플러시함. 버퍼는 원래 모두 채워졌을 때 플러시되면서 내용을 출력하지만, 필요한 경우에는 이처럼 즉시 출력할 수 있음.
+- println() 메소드는 print() 메소드에 줄바꿈 문자(\r\n)가 추가됨. HTML 문서에는 줄 바꿈에 \<br> 태그를 사용해야 함. HTML 문서에서 println() 메소드는 띄어쓰기 한 칸이 적용되는 정도만 차이가 있음.
+
+<br>
 
 ## 5. application 객체
 
+- javax.servlet.ServletContext 객체
 
+- application 내장 객체는 웹 애플리케이션당 하나만 생성되며, 모든 JSP 페이지에서 접근할 수 있음.
+- application 내장 객체는 ServletContext 타입임. 주로 웹 애플리케이션 전반에서 이용하는 정보를 저장하거나, 서버의 정보, 서버의 물리적 경로 등을 얻어오는 데 사용함.
+- web.xml에 설정한 컨텍스트 초기화 매개변수를 읽어오고 폴더의 물리적 경로를 알아낼 수 있음.
+- web.xml은 웹 애플리케이션에 대한 여러 가지 설정을 저장하는 곳으로 배포 서술자(deployment descriptor)라고 부름.
+- 물리적 경로란 특정 파일이나 폴더의 전체 경로, 즉 절대 경로를 말하며, 파일을 업로드하거나 입출력 작업 시에 주료 사용함.
+- application 내장 객체의 메소드
+  - `getServerInfo()` : 웹 컨테이너의 이름과 버전을 리턴함.
+  - `getMimeType(fileName)` : 지정한 파일의 MIME 타입을 리턴함.
+  - `getRealPath(path)` : 주어진 가상 경로에 해당하는 실제 경로를 가져옴.
+  - `log(message)` : 로그 파일에 message를 기록함.
+  - `setAttribute(String name, Object o)` : application 객체에 추가 객체를 저장함.
+  - `getAttribute(String name)` : 추가된 객체를 가져옴
+  - `removeAttribute(String name)` : 특정 Attribute를 지움.
 
+```jsp
+<!-- 초기화 매개변수 추가하기. web.xml -->
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns:xsi= ... 생략 ...
+  <display-name>MustHaveJSP</display-name>
+  <welcome-file-list>
+	... 생략 ...
+  </welcome-file-list>
 
+  <context-param>
+    <param-name>INIT_PARAM</param-name>
+    <param-value>web.xml에 저장한 초기화 매개변수</param-value>
+  </context-param>
+</web-app>
+```
+
+```jsp
+<!-- 다양한 서버 정보 얻어오기. ApplicationMain.jsp -->
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<html>
+<head><title>내장 객체 - application</title></head>
+<body>
+    <h2>web.xml에 설정한 내용 읽어오기</h2>
+    초기화 매개변수 : <%= application.getInitParameter("INIT_PARAM") %>
+
+    <h2>서버의 물리적 경로 얻어오기</h2>
+    application 내장 객체 : <%= application.getRealPath("/02ImplicitObject") %>
+
+    <h2>선언부에서 application 내장 객체 사용하기</h2>
+    <%!
+    public String useImplicitObject() {
+        return this.getServletContext().getRealPath("/02ImplicitObject");
+    }
+    public String useImplicitObject(ServletContext app) {
+        return app.getRealPath("/02ImplicitObject");
+    }
+    %>
+    <ul>
+        <li>this 사용 : <%= useImplicitObject() %></li>
+        <li>내장 객체를 인수로 전달 : <%= useImplicitObject(application) %></li>
+    </ul>
+</body>
+</html>
+
+```
+
+- getInitParameter() 메소드는 web.xml에 설정한 초기화 매개변수를 읽어오는 메소드. 설정된 파라미터가 없으면 null 반환.
+- getRealPath() 메소드는 현재 예제를 작성 중인 폴더("/02ImplicitObject")의 물리적 경로를 얻어와서 출력함. 인수로는 '컨텍스트 루트를 제외한' 경로를 입력하면 됨.
+
+- 선언부에서 application 내장 객체를 사용하려면 this를 통해 application 내장 객체를 얻어오거나, 인수로 전달해야지만 사용할 수 있음.
+- 이클립스를 사용했기 때문에 물리적 경로가 김. 이클립스는 작성한 JSP 파일을 실행하면 별도의 디렉토리를 생성하여 서블릿 변환과 컴파일을 진행하기 때문. 톰캣에 배포한 후 실행하면 JSP 파일이 있는 위치가 그대로 출력됨.
+
+<br>
 
 ## 6. exception 객체
 
+- try ~ catch에서 오류명과 오류 메시지를 출력하는 부분에서 사용됨.
+- JSP에서 그 이상으로 사용되는 경우는 거의 없음.
 
+- JSP에서 빈번하게 발생되는 에러 코드
+  - 404 : Not Found. 클라이언트가 요청한 경로에서 문서를 찾을 수 없음. URL 상의 경로명이나 파일명이 제대로 입력되었는지 확인.
+  - 405 : Method Not Allowed. 허용되지 않는 메소드, GET 방식 혹은 POST 방식으로 요청했는데 이를 처리할 컨트롤러가 없다는 뜻. 주로 서블릿으로 개발할 때 발생하게 되는데 doGet(), doPost() 메소드가 적절히 오버라이딩되었는지 확인.
+  - 500 : Internal Server Error. 서버 내부 오류, 코드에 오타가 있거나 로직에 문제가 있어 웹 서버가 요청 사항을 수행할 수 없음. 가장 많이 발생하는 에러. 개발 중인 코드를 전반적으로 확인하여 오류 처리해야 함.
 
+```jsp
+<!-- web.xml에 에러별 출력 페이지 설정. web.xml -->
+ <error-page>
+    <error-code>404</error-code>
+    <location>/02ImplicitObject/Exception.jsp</location>
+  </error-page>
+  <error-page>
+    <error-code>405</error-code>
+    <location>/02ImplicitObject/Exception.jsp</location>
+  </error-page>
+  <error-page>
+    <error-code>500</error-code>
+    <location>/02ImplicitObject/Exception.jsp</location>
+  </error-page>
+```
 
+- \<location> 엘리먼트에 경로를 명시할 때는 컨텍스트 루트를 제외한 나머지를 기술하면 됨.
+
+```jsp
+<!-- 에러 출력 페이지. Exception.jsp -->
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<html>
+<head><title>내장 객체 - exception</title></head>
+<body>
+<%
+int status = response.getStatus();  // response 내장 객체로부터 에러 코드 확인
+
+// 에러 코드에 따라 적절한 메시지 출력
+if (status == 404) {
+    out.print("404 에러가 발생하였습니다.");
+    out.print("<br/>파일 경로를 확인해주세요.");
+}
+else if (status == 405) {
+    out.print("405 에러가 발생하였습니다.");
+    out.print("<br/>요청 방식(method)을 확인해주세요.");
+}
+else if (status == 500) {
+    out.print("500 에러가 발생하였습니다.");
+    out.print("<br/>소스 코드에 오류가 없는지 확인해주세요.");
+}
+%>
+</body>
+</html>
+
+```
+
+- 실습 과정에서 위에서 web.xml에 추가한 내용은 주석으로 처리하는 것이 좋음. 실제 서비스에서 오류 발생 시 코드가 고객에게 그대로 노출되는 문제를 피하기 위해서 설정했지만 개발 시에는 자세한 에러 메시지를 확인하면서 디버깅해야 하므로 에러 페이지 지정은 개발이 완료된 후 하는 것이 좋음.
+
+<br>
 
 # References
 
