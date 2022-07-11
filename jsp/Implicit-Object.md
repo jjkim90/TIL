@@ -444,7 +444,8 @@ response.setHeader("myName", "안중근");  // 수정
 - javax.servlet.ServletContext 객체
 
 - application 내장 객체는 웹 애플리케이션당 하나만 생성되며, 모든 JSP 페이지에서 접근할 수 있음.
-- application 내장 객체는 ServletContext 타입임. 주로 웹 애플리케이션 전반에서 이용하는 정보를 저장하거나, 서버의 정보, 서버의 물리적 경로 등을 얻어오는 데 사용함.
+- application 내장 객체는 ServletContext 타입임.
+- 주로 웹 애플리케이션 전반에서 이용하는 정보를 저장하거나, 서버의 정보, 서버의 물리적 경로 등을 얻어오는 데 사용함.
 - web.xml에 설정한 컨텍스트 초기화 매개변수를 읽어오고 폴더의 물리적 경로를 알아낼 수 있음.
 - web.xml은 웹 애플리케이션에 대한 여러 가지 설정을 저장하는 곳으로 배포 서술자(deployment descriptor)라고 부름.
 - 물리적 경로란 특정 파일이나 폴더의 전체 경로, 즉 절대 경로를 말하며, 파일을 업로드하거나 입출력 작업 시에 주료 사용함.
