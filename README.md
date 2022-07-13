@@ -63,16 +63,27 @@
 
 ### HTML
 
-- [(RT)한 권으로 끝내는 실무 Java 웹 개발서](html/html5.md)
+- [HTML 기초](html/html5.md)
 
 <br>
 
 ### CSS
 
-- [(RT)한 권으로 끝내는 실무 Java 웹 개발서](css/css3.md)
+- [CSS 기초](css/css3.md)
 
 <br>
 
 ### JavaScript
 
-- [(RT)한 권으로 끝내는 실무 Java 웹 개발서](javascript/Basic-Javascript.md)
+- [자바스크립트 기초](javascript/Basic-Javascript.md)
+
+<br>
+
+### JSP
+
+- [서블릿 기초](jsp/Servlet-Basic.md)
+- [JSP 기초](jsp/JSP-Basic.md)
+- [내장 객체(Implicit Object)](jsp/Implicit-Object.md)
+- [내장 객체의 영역(Scope)](jsp/Implicit-Object-Scope.md)
+
+- [쿠키(Cookie)](jsp/Cookie.md)
