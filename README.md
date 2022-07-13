@@ -5,15 +5,14 @@
 <br>
 
 - 하루하루 공부한 내용을 기록.
-- 배경지식이 없는 사람이 읽을 수 있도록 쉽게 작성.
-
 - RT : Reading Textbooks. 교과서 읽기. 책 내용 전체를 공부하고 배운 것을 기록.
+
 
 <br>
 
 ---
 
-### Categories
+## Categories
 
 * [Java](#Java)
 
@@ -29,6 +28,7 @@
 
 * [JavaScript](#javascript)
 
+* [JSP](#JSP)
 
 <br>
 
